@@ -15,6 +15,8 @@ namespace CES2020.Integrs
         // POST api/connections
         public List<ForbindelseDto> Post([FromBody]Forsendelse value)
         {
+            ConnectionsIntegration oc = new ConnectionsIntegration();
+            oc.GetOceanicRoutes();
             List<ForbindelseDto> brds = new List<ForbindelseDto>();
 
             Forsendelse f = new Forsendelse
