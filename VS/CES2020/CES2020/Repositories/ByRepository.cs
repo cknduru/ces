@@ -18,7 +18,7 @@ namespace CES2020.Repositories
             this.db = base.GetContext();
         }
 
-        public void AddBy(By by)
+        public void Add(By by)
         {
 
             db.Byer.InsertOnSubmit(by);
@@ -34,7 +34,7 @@ namespace CES2020.Repositories
             }
         }
 
-        public void AddByer(IEnumerable<By> byer)
+        public void AddMultiple(IEnumerable<By> byer)
         {
             db.Byer.InsertAllOnSubmit(byer);
 
@@ -51,7 +51,14 @@ namespace CES2020.Repositories
 
         public int GetIdFromName(string name)
         {
-            return db.Byer.Where(b => b.Name == name).Select(b => b.Id).FirstOrDefault();
+            var id = db.Byer.Where(b => b.Name == name).Select(b => b.Id).FirstOrDefault();
+
+            if (id == default)
+            {
+                throw new InvalidOperationException($"City with name {name} not found");
+            }
+
+            return id;
         }
     }
 }

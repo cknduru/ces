@@ -12,7 +12,7 @@ namespace CES2020.Integrs
     {
         private static readonly HttpClient client = new HttpClient();
 
-        public List<BeregnetRuteDto> GetOceanicRoutes()
+        public List<ForbindelseDto> GetOceanicRoutes()
         {
             /*var values = new Dictionary<string, string>
             {
@@ -26,10 +26,10 @@ namespace CES2020.Integrs
 
             var responseString = await response.Content.ReadAsStringAsync();*/
 
-            List<BeregnetRuteDto> brds = new List<BeregnetRuteDto>();
+            List<ForbindelseDto> brds = new List<ForbindelseDto>();
 
             // do something and return data
-            BeregnetRuteDto brd = new BeregnetRuteDto();
+            ForbindelseDto brd = new ForbindelseDto();
             brd.Duration = 5;
             brd.From = "Congo";
             brd.To = "Niger";
@@ -40,7 +40,7 @@ namespace CES2020.Integrs
             return brds;
         }
 
-        public List<BeregnetRuteDto> GetEastIndiaTradingRoutes()
+        public List<ForbindelseDto> GetEastIndiaTradingRoutes()
         {
             /*var values = new Dictionary<string, string>
             {
@@ -54,10 +54,10 @@ namespace CES2020.Integrs
 
             var responseString = await response.Content.ReadAsStringAsync();*/
 
-            List<BeregnetRuteDto> brds = new List<BeregnetRuteDto>();
+            List<ForbindelseDto> brds = new List<ForbindelseDto>();
 
             // do something and return data
-            BeregnetRuteDto brd = new BeregnetRuteDto();
+            ForbindelseDto brd = new ForbindelseDto();
             brd.Duration = 5;
             brd.From = "Congo";
             brd.To = "Niger";
