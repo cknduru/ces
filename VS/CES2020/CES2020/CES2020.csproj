@@ -191,7 +191,7 @@
     <Compile Include="Models\PakkeDimensioner.cs" />
     <Compile Include="Models\RuteManager.cs" />
     <Compile Include="Models\RuteBeregner.cs" />
-    <Compile Include="Models\Sikkerheds Manager.cs" />
+    <Compile Include="Models\SikkerhedsManager.cs" />
     <Compile Include="Models\Sikkerhedsrolle.cs" />
     <Compile Include="Models\TelstarForbindelse.cs" />
     <Compile Include="Models\TelstarRute.cs" />

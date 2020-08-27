@@ -5,7 +5,7 @@ using System.Web;
 
 namespace CES2020.Models
 {
-    public class Sikkerheds_Manager
+    public class SikkerhedsManager
     {
         public void CheckBruger(Bruger bruger)
         { }
