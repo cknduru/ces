@@ -171,7 +171,7 @@
     </Compile>
     <Compile Include="Integrations\ConnectionsController.cs" />
     <Compile Include="Integrations\ConnectionsIntegration.cs" />
-    <Compile Include="Integrations\dtos\BeregnetRuteDto.cs" />
+    <Compile Include="Integrations\dtos\ForbindelseDto.cs" />
     <Compile Include="Integrations\dtos\BeregnetRuteInternalDto.cs" />
     <Compile Include="Integrations\InternalConnectionsController.cs" />
     <Compile Include="Models\BeregnetRute.cs" />
