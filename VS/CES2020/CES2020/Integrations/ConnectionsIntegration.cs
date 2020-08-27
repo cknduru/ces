@@ -8,6 +8,7 @@ using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 using System.Web.Script.Serialization;
+using CES2020.Integrations.dtos;
 using CES2020.Integrs.dto;
 using CES2020.Models;
 using CES2020.Models.Enums;
@@ -20,83 +21,81 @@ namespace CES2020.Integrs
     public class ConnectionsIntegration
     {
         private static readonly HttpClient client = new HttpClient();
-        private static readonly String oceanicSiteBase = "http://wa-tlpl.azurewebsites.net";
-        private static readonly String eastIndiaSiteBase = "http://wa-eitpl.azurewebsites.net";
-        private static readonly String resource = "/api/connections";
+        private static readonly string oceanicSiteBase = "http://wa-tlpl.azurewebsites.net";
+        private static readonly string eastIndiaSiteBase = "http://wa-eitpl.azurewebsites.net";
+        private static readonly string resource = "/api/connections";
 
 
-        private IRestResponse GetExternalRoutes(String baseurl, String resource, String json)
+        private IRestResponse GetExternalRoutes(string baseurl, string resource, string json)
         {
             var client = new RestClient(baseurl);
-            var request = new RestSharp.RestRequest(resource, RestSharp.Method.POST) { RequestFormat = RestSharp.DataFormat.Json }
-                .AddBody(json);
+            var request = new RestRequest(resource, Method.POST) { RequestFormat = DataFormat.Json }.AddBody(json);
 
             return client.Execute(request);
         }
 
-        public List<ForbindelseDto> GetOceanicRoutes(ForbindelseDto forbindelse)
+        public List<ForbindelseDto> GetOceanicRoutes(Forsendelse forsendelse)
         {
-            List<ForbindelseDto> brds = new List<ForbindelseDto>();
-            Forsendelse f = new Forsendelse();
-
-            f.Forsendelsesdato = DateTime.Now;
-            By b = new By();
-            By b1 = new By();
-            b.Name = forbindelse.From;
-            b1.Name = forbindelse.To;
-
-            f.Fra = b;
-            f.Til = b1;
-            f.Godstype = Enums.GodsType.EXP;
-            f.PakkeDimensioner = new PakkeDimensioner();
-            f.Rekommanderet = false;
-            f.Vaegt = 15;
-
-            var json = JsonConvert.SerializeObject(f);
-            String res = GetExternalRoutes(oceanicSiteBase, resource, json).Content;
-            ForbindelseDto dto = new ForbindelseDto();
-
-            try
-            {
-                // trim backets from start and end of JSON
-                dto = JsonConvert.DeserializeObject<ForbindelseDto>(res.Substring(1, res.Length - 2));
-                brds.Add(dto);
-            }
-            catch (Exception ex)
-            {
-            }
-
-            return brds;
+            return GetRoutes(forsendelse, oceanicSiteBase);
         }
 
-        public List<ForbindelseDto> GetEastIndiaTradingRoutes()
+        public List<ForbindelseDto> GetEastIndiaTradingRoutes(Forsendelse forsendelse)
         {
-            List<ForbindelseDto> brds = new List<ForbindelseDto>();
-            Forsendelse f = new Forsendelse();
+            return GetRoutes(forsendelse, oceanicSiteBase);
+        }
 
-            f.Forsendelsesdato = DateTime.Now;
-            f.Fra = new By();
-            f.Til = new By();
-            f.Godstype = Enums.GodsType.EXP;
-            f.PakkeDimensioner = new PakkeDimensioner();
-            f.Rekommanderet = false;
-            f.Vaegt = 15;
+        public List<ForbindelseDto> GetRoutes(Forsendelse forsendelse, string siteBase)
+        {
+            var forbindelser = new List<ForbindelseDto>();
 
-            var json = JsonConvert.SerializeObject(f);
-            String res = GetExternalRoutes(eastIndiaSiteBase, resource, json).Content;
-            ForbindelseDto dto = new ForbindelseDto();
+            var json = JsonConvert.SerializeObject(ConvertToForsendelseDto(forsendelse));
+            var res = GetExternalRoutes(siteBase, resource, json).Content;
 
             try
             {
                 // trim backets from start and end of JSON
-                dto = JsonConvert.DeserializeObject<ForbindelseDto>(res);
-                brds.Add(dto);
+                var dto = JsonConvert.DeserializeObject<ForbindelseDto>(res.Substring(1, res.Length - 2));
+                forbindelser.Add(dto);
             }
             catch (Exception ex)
             {
+                Console.WriteLine(ex);
             }
 
-            return brds;
+            return forbindelser;
+        }
+
+
+        private ForsendelseDto ConvertToForsendelseDto(Forsendelse forsendelse)
+        {
+            return new ForsendelseDto()
+            { 
+                GoodsTypeIds = new string[] { GetGodstypeName(forsendelse.Godstype) },
+                Weight = forsendelse.Vaegt,
+                Length = forsendelse.PakkeDimensioner.Laengde,
+                Width = forsendelse.PakkeDimensioner.Bredde,
+                Height = forsendelse.PakkeDimensioner.Hoejde,
+                DeliveryDate = forsendelse.Forsendelsesdato
+            };
+        }
+
+        private string GetGodstypeName(Enums.GodsType godstype)
+        {
+            switch (godstype)
+            {
+                case Enums.GodsType.REF:
+                    return "REF";
+                case Enums.GodsType.ANI:
+                    return "ANI";
+                case Enums.GodsType.CAU:
+                    return "CAU";
+                case Enums.GodsType.EXP:
+                    return "EXP";
+                case Enums.GodsType.WEP:
+                    return "WEP";
+                default:
+                    return string.Empty;
+            }
         }
     }
 }

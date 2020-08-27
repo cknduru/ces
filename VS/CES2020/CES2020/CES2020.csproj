@@ -177,6 +177,7 @@
     <Compile Include="Integrations\ConnectionsIntegration.cs" />
     <Compile Include="Integrations\dtos\ForbindelseDto.cs" />
     <Compile Include="Integrations\dtos\BeregnetRuteInternalDto.cs" />
+    <Compile Include="Integrations\dtos\ForsendelseDto.cs" />
     <Compile Include="Integrations\InternalConnectionsController.cs" />
     <Compile Include="Models\BeregnetRute.cs" />
     <Compile Include="Models\Bruger.cs" />
