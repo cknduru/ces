@@ -5,17 +5,18 @@ using System.Net;
 using System.Net.Http;
 using System.Web.Http;
 using CES2020.Integrs.dto;
-using CES2020.Integrs.dto;
 using CES2020.Models;
 using CES2020.Models.Enums;
 
-namespace CES2020.Integration
+namespace CES2020.Integrs
 {
     public class ConnectionsController : ApiController
     {
         // POST api/rute
-        public BeregnetRuteDto Post([FromBody]Forsendelse value)
+        public List<BeregnetRuteDto> Post([FromBody]Forsendelse value)
         {
+            List<BeregnetRuteDto> brds = new List<BeregnetRuteDto>();
+
             Forsendelse f = new Forsendelse
             {
                 Forsendelsesdato = value.Forsendelsesdato,
@@ -33,22 +34,9 @@ namespace CES2020.Integration
             brd.Forsendelse = f;
             brd.SamletPris = 2.3f;
             brd.SamletTid = 32;
+            brds.Add(brd);
 
-            return brd;
+            return brds;
         }
-/*
-        public Forsendelse Get()
-        {
-            Forsendelse f = new Forsendelse();
-            f.Forsendelsesdato = DateTime.Now;
-            f.Fra = new By();
-            f.Til = new By();
-            f.Godstype = Enums.GodsType.EXP;
-            f.PakkeDimensioner = new PakkeDimensioner();
-            f.Rekommanderet = true;
-            f.Vægt = 4;
-
-            return f;
-        }*/
     }
 }
