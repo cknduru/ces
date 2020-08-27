@@ -18,7 +18,7 @@ namespace CES2020.Models
             this.telstarForbindelseRepository = new TelstarForbindelseRepository();
         }
 
-        private List<string> Byer = new List<string>()
+        private readonly List<string> Byer = new List<string>()
         {
             "Tanger",
             "Tunis",
