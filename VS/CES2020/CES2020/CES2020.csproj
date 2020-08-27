@@ -166,6 +166,7 @@
     <Compile Include="Models\BeregnetRute.cs" />
     <Compile Include="Models\Bruger.cs" />
     <Compile Include="Models\By.cs" />
+    <Compile Include="Models\DBSeed.cs" />
     <Compile Include="Models\Enums\Enums.cs" />
     <Compile Include="Models\Forbindelse.cs" />
     <Compile Include="Models\Forsendelse.cs" />
