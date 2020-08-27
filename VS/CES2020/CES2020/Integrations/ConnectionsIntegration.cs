@@ -21,7 +21,8 @@ namespace CES2020.Integrs
     {
         private static readonly HttpClient client = new HttpClient();
         private static readonly String oceanicSiteBase = "http://wa-tlpl.azurewebsites.net";
-        private static readonly String oceanicSiteResource = "/api/connections";
+        private static readonly String eastIndiaSiteBase = "http://wa-eitpl.azurewebsites.net";
+        private static readonly String resource = "/api/connections";
 
 
         private IRestResponse GetExternalRoutes(String baseurl, String resource, String json)
@@ -47,19 +48,18 @@ namespace CES2020.Integrs
             f.Vaegt = 15;
 
             var json = JsonConvert.SerializeObject(f);
-            String res = GetExternalRoutes(oceanicSiteBase, oceanicSiteResource, json).Content;
+            String res = GetExternalRoutes(oceanicSiteBase, resource, json).Content;
             ForbindelseDto dto = new ForbindelseDto();
 
             try
             {
                 // trim backets from start and end of JSON
                 dto = JsonConvert.DeserializeObject<ForbindelseDto>(res.Substring(1, res.Length - 2));
+                brds.Add(dto);
             }
             catch (Exception ex)
             {
             }
-
-            brds.Add(dto);
 
             return brds;
         }
@@ -67,15 +67,29 @@ namespace CES2020.Integrs
         public List<ForbindelseDto> GetEastIndiaTradingRoutes()
         {
             List<ForbindelseDto> brds = new List<ForbindelseDto>();
+            Forsendelse f = new Forsendelse();
 
-            // do something and return data
-            ForbindelseDto brd = new ForbindelseDto();
-            brd.Duration = 5;
-            brd.From = "Congo";
-            brd.To = "Niger";
-            brd.Price = 41;
+            f.Forsendelsesdato = DateTime.Now;
+            f.Fra = new By();
+            f.Til = new By();
+            f.Godstype = Enums.GodsType.EXP;
+            f.PakkeDimensioner = new PakkeDimensioner();
+            f.Rekommanderet = false;
+            f.Vaegt = 15;
 
-            brds.Add(brd);
+            var json = JsonConvert.SerializeObject(f);
+            String res = GetExternalRoutes(eastIndiaSiteBase, resource, json).Content;
+            ForbindelseDto dto = new ForbindelseDto();
+
+            try
+            {
+                // trim backets from start and end of JSON
+                dto = JsonConvert.DeserializeObject<ForbindelseDto>(res.Substring(1, res.Length - 2));
+                brds.Add(dto);
+            }
+            catch (Exception ex)
+            {
+            }
 
             return brds;
         }
