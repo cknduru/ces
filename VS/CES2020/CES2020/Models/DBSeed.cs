@@ -8,7 +8,17 @@ namespace CES2020.Models
 {
     public class DBSeed
     {
-        private List<string> Byer = new List<string>()
+        private readonly ByRepository byRepository;
+        private readonly TelstarForbindelseRepository telstarForbindelseRepository;
+
+
+        public DBSeed()
+        {
+            this.byRepository = new ByRepository();
+            this.telstarForbindelseRepository = new TelstarForbindelseRepository();
+        }
+
+        private readonly List<string> Byer = new List<string>()
         {
             "Tanger",
             "Tunis",
@@ -74,7 +84,7 @@ namespace CES2020.Models
             ("Luanda","Congo",3),
             ("Luanda","Kabalo",4),
             ("Luanda","Mocambique",10),
-            ("Luanda","Victoriafaldene",12),
+            ("Luanda","Victoriafaldene",11),
             ("Luanda","Dragebjerget",11),
             ("Mocambique","Luanda",10),
             ("Mocambique","Victoriafaldene",5),
@@ -84,7 +94,7 @@ namespace CES2020.Models
             ("Victoriafaldene","Mocambique",5),
             ("Victoriafaldene","Dragebjerget",3),
             ("Victoriafaldene","Hvalbugten",4),
-            ("Victoriafaldene","Luanda",12),
+            ("Victoriafaldene","Luanda",11),
             ("Hvalbugten","Victoriafaldene",4),
             ("Hvalbugten","Kapstaden",4),
             ("Kapstaden","Hvalbugten",4),
@@ -135,8 +145,6 @@ namespace CES2020.Models
 
         public void SeedByer()
         {
-            var byRepository = new ByRepository();
-
             var byer = new List<By>();
 
             foreach (var byNavn in this.Byer)
@@ -144,7 +152,22 @@ namespace CES2020.Models
                 byer.Add(new By() { Name = byNavn });
             }
 
-            byRepository.AddByer(byer);
+            byRepository.AddMultiple(byer);
+        }
+
+        public void SeedForbindelser()
+        {
+            foreach (var forbindelseTuple in this.Forbindelser)
+            {
+                var forbindelse = new TelstarForbindelse()
+                {
+                    Fra = new By() { Id = byRepository.GetIdFromName(forbindelseTuple.Item1) },
+                    Til = new By() { Id = byRepository.GetIdFromName(forbindelseTuple.Item2) },
+                    AntalSegmenter = forbindelseTuple.Item3
+                };
+
+                telstarForbindelseRepository.Add(forbindelse);
+            }
         }
     }
 }

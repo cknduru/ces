@@ -2,7 +2,11 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using CES2020.Integrs;
+using CES2020.Integrs.dto;
 using CES2020.Models;
+using CES2020.Models.Enums;
+using CES2020.Repositories;
 using Dijkstra.NET.Graph;
 using Dijkstra.NET.ShortestPath;
 
@@ -10,22 +14,62 @@ namespace CES2020.Services
 {
     public class RuteberegningService
     {
-        public IEnumerable<Forbindelse> GetPossibleForbindelser(Forsendelse forsendelse)
+        private readonly TelstarForbindelseRepository telstarForbindelseRepository;
+        private readonly ConnectionsIntegration connectionsIntegration;
+        private readonly ByRepository byRepository;
+        private readonly Konfiguration konfiguration;
+
+        public RuteberegningService()
         {
-            // TODO-wls get actual forbindelser
-            var oceanicForbindelser = new Collection<Forbindelse>();
-            var eastIndiaForbindelser = new Collection<Forbindelse>();
-            var telstarForbindelser = new Collection<TelstarForbindelse>();
+            this.byRepository = new ByRepository();
+            this.telstarForbindelseRepository = new TelstarForbindelseRepository();
+            this.connectionsIntegration = new ConnectionsIntegration();
+            this.konfiguration = new KonfigurationRepository().Get();
+        }
 
-            var possibleForbindelser = telstarForbindelser.Where(f => f.Udløbsdato == null || f.Udløbsdato >= forsendelse.Forsendelsesdato).Select(f => f as Forbindelse);
+        public IEnumerable<Forbindelse> GetCombinedForbindelser(Forsendelse forsendelse)
+        {
+            var oceanicForbindelser = ConvertToForbindelser(connectionsIntegration.GetOceanicRoutes(), Enums.Forbindelsestype.Oceanic);
+            var eastIndiaForbindelser = ConvertToForbindelser(connectionsIntegration.GetEastIndiaTradingRoutes(), Enums.Forbindelsestype.EastIndia);
 
+            var possibleForbindelser = GetPossibleTelstarForbindelser(forsendelse).Select(f => f as Forbindelse);
             possibleForbindelser = possibleForbindelser.Concat(oceanicForbindelser);
             possibleForbindelser = possibleForbindelser.Concat(eastIndiaForbindelser);
 
             return possibleForbindelser;
         }
 
-        public ShortestPathResult shortestPath(List<Forbindelse> forbindelser, List<By> byer, int fra, int til)
+        public IEnumerable<TelstarForbindelse> GetPossibleTelstarForbindelser(Forsendelse forsendelse)
+        {
+            var possibleForbindelser = Enumerable.Empty<TelstarForbindelse>();
+
+            if (forsendelse.Vaegt >= this.konfiguration.MaxVaegt) return possibleForbindelser;
+
+            var telstarForbindelser = telstarForbindelseRepository.GetAll();
+
+            foreach (var forbindelse in telstarForbindelser)
+            {
+                forbindelse.ComputePricesAndTimes(konfiguration);
+            }
+
+            possibleForbindelser = telstarForbindelser.Where(f => f.Udløbsdato == null || f.Udløbsdato > forsendelse.Forsendelsesdato);
+
+            return possibleForbindelser;
+        }
+
+        public IEnumerable<Forbindelse> ConvertToForbindelser(IEnumerable<ForbindelseDto> forbindelseDtos, Enums.Forbindelsestype forbindelsestype)
+        {
+            return forbindelseDtos.Select(f => new Forbindelse()
+            {
+                Pris = f.Price,
+                Tid = f.Duration,
+                Fra = new By() { Id = byRepository.GetIdFromName(f.From), Name = f.From },
+                Til = new By() { Id = byRepository.GetIdFromName(f.To), Name = f.To },
+                ForbindelsesType = forbindelsestype
+            });
+        }
+
+        public ShortestPathResult ShortestPath(List<Forbindelse> forbindelser, List<By> byer, int fra, int til)
         {
             var graph = new Graph<int, string>();
             foreach (By by in byer)
@@ -42,5 +86,7 @@ namespace CES2020.Services
             return result;
 
         }
+
+        
     }
 }

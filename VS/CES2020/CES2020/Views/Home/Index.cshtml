@@ -1,14 +1,63 @@
 ﻿<h2>Telstar Rute</h2>
 
-<p> yo yo yo<p/>
+<div>
+    <span>
+        <label class="by" for="fra">Fra:</label>
+        <select id='fra'>
+            <option value="cairo">Cairo</option>
+            <option value="Tenger">Tenger</option>
+        </select>
+    </span>
 
-<!-- We will put our React component inside this div. -->
-<div id="telstar-rute"></div>
+    <span>
+        <label class="by" for="til">Til:</label>
+        <select id="til">
+            <option value="cairo">Cairo</option>
+            <option value="Tenger">Tenger</option>
+        </select>
+    </span>
 
-<!-- Load React. -->
-<!-- Note: when deploying, replace "development.js" with "production.min.js". -->
-<script src="https://unpkg.com/react@16/umd/react.development.js" crossorigin ></script>
-<script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js" crossorigin ></script>
+    <span>
+        <label class="dato" for="dato">Dato:</label>
+        <input type="date" id="dato" name="trip-start"
+           min="2018-01-01" max="2100-12-31"/>
+    </span>
+</div>
 
-<!-- Load our React component. -->
-<script src="telstar-rute.jsx"></script>
+<div>
+    <span>
+        <label class="rekommanderet" for="rekomanderet">Gør pakken sporbar</label>
+        <input type="checkbox" />
+    </span>
+
+    <div>
+        <label class="godstype" for="godstype">Set speciel godstype</label>
+        <input id="godstype" type="checkbox" />
+
+        <div class="typer">
+            <div>
+            <input id="frostvarer" type="checkbox" />
+            <label for="frostvarer">Frostvarer</label>
+            </div>
+
+            
+            <div>
+            <input id="levendedyr" type="checkbox" />
+            <label for="levendedyr">Levende dyt</label>
+            </div>
+
+            
+            <div>
+            <input id="eksplosiv" type="checkbox" />
+            <label for="eksplosiv">Ekslosive pakker</label>
+            </div>
+
+            
+            <div>
+            <input id="skrøblig" type="checkbox" />
+            <label for="skrøblig">Skrøblige pakker</label>
+            </div>
+        </div>
+    </div>
+</div>
+

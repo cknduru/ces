@@ -33,9 +33,9 @@ namespace CES2020.Integrs
             return client.Execute(request);
         }
 
-        public List<BeregnetRuteDto> GetOceanicRoutes()
+        public List<ForbindelseDto> GetOceanicRoutes()
         {
-            List<BeregnetRuteDto> brds = new List<BeregnetRuteDto>();
+            List<ForbindelseDto> brds = new List<ForbindelseDto>();
             Forsendelse f = new Forsendelse();
 
             f.Forsendelsesdato = DateTime.Now;
@@ -44,16 +44,16 @@ namespace CES2020.Integrs
             f.Godstype = Enums.GodsType.EXP;
             f.PakkeDimensioner = new PakkeDimensioner();
             f.Rekommanderet = false;
-            f.Vægt = 15;
+            f.Vaegt = 15;
 
             var json = JsonConvert.SerializeObject(f);
             String res = GetExternalRoutes(oceanicSiteBase, oceanicSiteResource, json).Content;
-            BeregnetRuteDto dto = new BeregnetRuteDto();
+            ForbindelseDto dto = new ForbindelseDto();
 
             try
             {
                 // trim backets from start and end of JSON
-                dto = JsonConvert.DeserializeObject<BeregnetRuteDto>(res.Substring(1, res.Length - 2));
+                dto = JsonConvert.DeserializeObject<ForbindelseDto>(res.Substring(1, res.Length - 2));
             }
             catch (Exception ex)
             {
@@ -64,12 +64,12 @@ namespace CES2020.Integrs
             return brds;
         }
 
-        public List<BeregnetRuteDto> GetEastIndiaTradingRoutes()
+        public List<ForbindelseDto> GetEastIndiaTradingRoutes()
         {
-            List<BeregnetRuteDto> brds = new List<BeregnetRuteDto>();
+            List<ForbindelseDto> brds = new List<ForbindelseDto>();
 
             // do something and return data
-            BeregnetRuteDto brd = new BeregnetRuteDto();
+            ForbindelseDto brd = new ForbindelseDto();
             brd.Duration = 5;
             brd.From = "Congo";
             brd.To = "Niger";

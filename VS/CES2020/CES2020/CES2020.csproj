@@ -175,7 +175,7 @@
     </Compile>
     <Compile Include="Integrations\ConnectionsController.cs" />
     <Compile Include="Integrations\ConnectionsIntegration.cs" />
-    <Compile Include="Integrations\dtos\BeregnetRuteDto.cs" />
+    <Compile Include="Integrations\dtos\ForbindelseDto.cs" />
     <Compile Include="Integrations\dtos\BeregnetRuteInternalDto.cs" />
     <Compile Include="Integrations\InternalConnectionsController.cs" />
     <Compile Include="Models\BeregnetRute.cs" />
@@ -199,6 +199,7 @@
     <Compile Include="Repositories\BaseRepository.cs" />
     <Compile Include="Repositories\ByRepository.cs" />
     <Compile Include="Repositories\DatabaseContext.cs" />
+    <Compile Include="Repositories\KonfigurationRepository.cs" />
     <Compile Include="Repositories\TelstarForbindelseRepository.cs" />
     <Compile Include="Services\AdministrationService.cs" />
     <Compile Include="Services\PrisadministrationService.cs" />
@@ -240,7 +241,6 @@
     <Content Include="Scripts\jquery-3.4.1.slim.js" />
     <Content Include="Scripts\jquery-3.4.1.slim.min.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
-    <Content Include="Views\Home\telstar_rute_container.jsx" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -255,6 +255,8 @@
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
+    <Content Include="Views\PrisAdmin\PrisAdminPage.cshtml" />
+    <Content Include="Views\Administration\AdminPage.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

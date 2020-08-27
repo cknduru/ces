@@ -1,0 +1,33 @@
+﻿<h2>Telstar Rute</h2>
+
+<div>
+    <span>
+        <label class="by" for="fra">Fra:</label>
+        <select id='fra'>
+            <option value="cairo">Cairo</option>
+            <option value="Tenger">Tenger</option>
+        </select>
+    </span>
+
+    <span>
+        <label class="by" for="til">Til:</label>
+        <select id="til">
+            <option value="cairo">Cairo</option>
+            <option value="Tenger">Tenger</option>
+        </select>
+    </span>
+
+    <span>
+        <label for="Segmenter">Afstand i segmenter:</label>
+        <input type="number" id="Segmenter" name="Segmenter"><br><br>
+    </span>
+
+    <span>
+        <label class="dato" for="dato">Udløbsdato:</label>
+        <input type="date" id="dato" name="trip-start"
+               min="2018-01-01" max="2100-12-31" />
+    </span>
+    <input type="submit" id="Opdater" value="Opdater">
+    <input type="submit" id="Slet" value="Slet">
+    <input type="submit" id="Tilføj" value="Tilføj">
+</div>

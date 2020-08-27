@@ -13,12 +13,12 @@ namespace CES2020.Integrs
     public class ConnectionsController : ApiController
     {
         // POST api/connections
-        public List<BeregnetRuteDto> Post([FromBody]Forsendelse value)
+        public List<ForbindelseDto> Post([FromBody]Forsendelse value)
         {
             ConnectionsIntegration oc = new ConnectionsIntegration();
             oc.GetOceanicRoutes();
-            List<BeregnetRuteDto> brds = new List<BeregnetRuteDto>();
-            
+            List<ForbindelseDto> brds = new List<ForbindelseDto>();
+
             Forsendelse f = new Forsendelse
             {
                 Forsendelsesdato = value.Forsendelsesdato,
@@ -27,11 +27,11 @@ namespace CES2020.Integrs
                 Godstype = value.Godstype,
                 PakkeDimensioner = value.PakkeDimensioner,
                 Rekommanderet = value.Rekommanderet,
-                Vægt = value.Vægt
+                Vaegt = value.Vaegt
             };
 
             // do something and return data
-            BeregnetRuteDto brd = new BeregnetRuteDto();
+            ForbindelseDto brd = new ForbindelseDto();
             brd.Duration = 5;
             brd.From = "Congo";
             brd.To = "Niger";

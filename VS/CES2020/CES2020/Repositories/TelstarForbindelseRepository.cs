@@ -11,14 +11,14 @@ namespace CES2020.Repositories
 {
     public class TelstarForbindelseRepository : BaseRepository
     {
-        private readonly DatabaseContext db;
+        private readonly DatabaseContext _db;
 
-        TelstarForbindelseRepository()
+        public TelstarForbindelseRepository()
         {
-            this.db = base.GetContext();
+            this._db = base.GetContext();
         }
 
-        public void AddForbindelse(TelstarForbindelse forbindelse)
+        public void Add(TelstarForbindelse forbindelse)
         {
             var dbForbindelse = new DbTelstarForbindelse()
             {
@@ -31,17 +31,29 @@ namespace CES2020.Repositories
                 AntalSegmenter = forbindelse.AntalSegmenter
             };
 
-            db.TelstarForbindelser.InsertOnSubmit(dbForbindelse);
+            _db.TelstarForbindelser.InsertOnSubmit(dbForbindelse);
 
             try
             {
-                db.SubmitChanges();
+                _db.SubmitChanges();
             }
             catch (Exception e)
             {
                 Console.WriteLine(e);
                 throw;
             }
+        }
+
+        public IEnumerable<TelstarForbindelse> GetAll()
+        {
+            return _db.TelstarForbindelser.Select(f => new TelstarForbindelse()
+            {
+                Id = f.Id,
+                Fra = _db.Byer.FirstOrDefault(b => b.Id == f.FraId),
+                Til = _db.Byer.FirstOrDefault(b => b.Id == f.TilId),
+                AntalSegmenter = f.AntalSegmenter,
+                Udløbsdato = f.Udløbsdato,
+            }).AsEnumerable();
         }
     }
 }

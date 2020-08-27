@@ -6,7 +6,7 @@ using CES2020.Models;
 
 namespace CES2020.Integrs.dto
 {
-    public class BeregnetRuteDto
+    public class ForbindelseDto
     {
         public String To { get; set; }
         public String From { get; set; }
