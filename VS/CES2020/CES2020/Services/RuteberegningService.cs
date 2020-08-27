@@ -49,12 +49,23 @@ namespace CES2020.Services
 
             foreach (var forbindelse in telstarForbindelser)
             {
-                forbindelse.ComputePricesAndTimes(konfiguration);
+                forbindelse.ComputeBasePricesAndTimes(konfiguration);
             }
 
             possibleForbindelser = telstarForbindelser.Where(f => f.Udløbsdato == null || f.Udløbsdato > forsendelse.Forsendelsesdato);
 
             return possibleForbindelser;
+        }
+
+        public IEnumerable<ForbindelseDto> GetForbindelseDtos(Forsendelse forsendelse)
+        {
+            return GetPossibleTelstarForbindelser(forsendelse).Select(f => new ForbindelseDto()
+            {
+                From = f.Fra.Name,
+                To = f.Til.Name,
+                Price = (int)f.Pris,
+                Duration = f.Tid
+            });
         }
 
         public IEnumerable<Forbindelse> ConvertToForbindelser(IEnumerable<ForbindelseDto> forbindelseDtos, Enums.Forbindelsestype forbindelsestype)
