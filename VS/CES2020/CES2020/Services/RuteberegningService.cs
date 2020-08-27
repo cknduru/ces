@@ -17,6 +17,7 @@ namespace CES2020.Services
         private readonly TelstarForbindelseRepository telstarForbindelseRepository;
         private readonly ConnectionsIntegration connectionsIntegration;
         private readonly ByRepository byRepository;
+        private readonly GodstypeRepository godstypeRepository;
         private readonly Konfiguration konfiguration;
 
         public RuteberegningService()
@@ -25,6 +26,7 @@ namespace CES2020.Services
             this.telstarForbindelseRepository = new TelstarForbindelseRepository();
             this.connectionsIntegration = new ConnectionsIntegration();
             this.konfiguration = new KonfigurationRepository().Get();
+            this.godstypeRepository = new GodstypeRepository();
         }
 
         public IEnumerable<Forbindelse> GetCombinedForbindelser(Forsendelse forsendelse)
@@ -59,11 +61,13 @@ namespace CES2020.Services
 
         public IEnumerable<ForbindelseDto> GetForbindelseDtos(Forsendelse forsendelse)
         {
+            var tillaeg = godstypeRepository.Get(forsendelse.Godstype).Tillaeg;
+
             return GetPossibleTelstarForbindelser(forsendelse).Select(f => new ForbindelseDto()
             {
                 From = f.Fra.Name,
                 To = f.Til.Name,
-                Price = (int)f.Pris,
+                Price = (int)(f.Pris * tillaeg),
                 Duration = f.Tid
             });
         }

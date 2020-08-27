@@ -12,5 +12,7 @@ namespace CES2020.Repositories
         public Table<By> Byer;
 
         public Table<Konfiguration> Konfigurations;
+
+        public Table<Godstype> Godstyper;
     }
 }

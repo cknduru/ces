@@ -9,23 +9,18 @@ using CES2020.Models.Enums;
 
 namespace CES2020.Repositories
 {
-    public class KonfigurationRepository : BaseRepository
+    public class GodstypeRepository : BaseRepository
     {
         private readonly DatabaseContext _db;
 
-        public KonfigurationRepository()
+        public GodstypeRepository()
         {
             this._db = base.GetContext();
         }
 
-        public Konfiguration Get()
+        public void AddMulitple(IEnumerable<Godstype> godstyper)
         {
-            return _db.Konfigurations.First();
-        }
-
-        public void Set(Konfiguration konfiguration)
-        {
-            _db.Konfigurations.InsertOnSubmit(konfiguration);
+            _db.Godstyper.InsertAllOnSubmit(godstyper);
 
             try
             {
@@ -36,6 +31,16 @@ namespace CES2020.Repositories
                 Console.WriteLine(e);
                 throw;
             }
+        }
+
+        public Godstype Get(Enums.GodsType godstype)
+        {
+            return _db.Godstyper.FirstOrDefault(g => g.Type == godstype);
+        }
+
+        public IEnumerable<Godstype> GetAll()
+        {
+            return _db.Godstyper.ToList();
         }
     }
 }
