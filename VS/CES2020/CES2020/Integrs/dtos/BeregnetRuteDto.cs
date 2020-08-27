@@ -8,9 +8,9 @@ namespace CES2020.Integrs.dto
 {
     public class BeregnetRuteDto
     {
-        public float SamletPris { get; set; }
-        public int SamletTid { get; set; }
-        public int Andel { get; set; }
-        public Forsendelse Forsendelse { get; set; }
+        public String To { get; set; }
+        public String From { get; set; }
+        public int Duration { get; set; }
+        public int Price { get; set; }
     }
 }

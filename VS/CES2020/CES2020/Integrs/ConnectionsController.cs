@@ -12,7 +12,7 @@ namespace CES2020.Integrs
 {
     public class ConnectionsController : ApiController
     {
-        // POST api/rute
+        // POST api/connections
         public List<BeregnetRuteDto> Post([FromBody]Forsendelse value)
         {
             List<BeregnetRuteDto> brds = new List<BeregnetRuteDto>();
@@ -30,10 +30,11 @@ namespace CES2020.Integrs
 
             // do something and return data
             BeregnetRuteDto brd = new BeregnetRuteDto();
-            brd.Andel = 32;
-            brd.Forsendelse = f;
-            brd.SamletPris = 2.3f;
-            brd.SamletTid = 32;
+            brd.Duration = 5;
+            brd.From = "Congo";
+            brd.To = "Niger";
+            brd.Price = 41;
+
             brds.Add(brd);
 
             return brds;
