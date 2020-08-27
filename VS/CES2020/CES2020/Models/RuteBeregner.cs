@@ -5,10 +5,11 @@ using System.Web;
 
 namespace CES2020.Models
 {
-    public class By
+    public class RuteBeregner
     {
-        private int Id { get; set; }
-        private string Name { get; set; }
-        
+        private List<BeregnetRute> BeregnRuter(Forbindelse)
+        {
+
+        };
     }
 }

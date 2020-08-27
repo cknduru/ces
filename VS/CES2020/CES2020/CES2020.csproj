@@ -160,8 +160,17 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\BeregnetRute.cs" />
     <Compile Include="Models\By.cs" />
+    <Compile Include="Models\Enums\Enums.cs" />
     <Compile Include="Models\Forbindelse.cs" />
+    <Compile Include="Models\Forsendelse.cs" />
+    <Compile Include="Models\Godstype.cs" />
+    <Compile Include="Models\Konfiguration.cs" />
+    <Compile Include="Models\Pakke Dimensioner.cs" />
+    <Compile Include="Models\Rute Manager.cs" />
+    <Compile Include="Models\RuteBeregner.cs" />
+    <Compile Include="Models\Telstar forbindelse.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
