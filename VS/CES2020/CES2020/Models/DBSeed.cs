@@ -16,7 +16,6 @@ namespace CES2020.Models
         {
             this.byRepository = new ByRepository();
             this.telstarForbindelseRepository = new TelstarForbindelseRepository();
-
         }
 
         private List<string> Byer = new List<string>()
@@ -153,32 +152,21 @@ namespace CES2020.Models
                 byer.Add(new By() { Name = byNavn });
             }
 
-            byRepository.AddByer(byer);
+            byRepository.AddMultiple(byer);
         }
 
         public void SeedForbindelser()
         {
             foreach (var forbindelseTuple in this.Forbindelser)
             {
-                var fraId = byRepository.GetIdFromName(forbindelseTuple.Item1);
-                if (fraId == 0)
-                {
-                    throw new InvalidOperationException($"City with name {forbindelseTuple.Item1} not found");
-                }
-                var tilId = byRepository.GetIdFromName(forbindelseTuple.Item2);
-                if (tilId == 0)
-                {
-                    throw new InvalidOperationException($"City with name {forbindelseTuple.Item2} not found");
-                }
-
                 var forbindelse = new TelstarForbindelse()
                 {
-                    Fra = new By() {Id = fraId},
-                    Til = new By() { Id = tilId},
+                    Fra = new By() { Id = byRepository.GetIdFromName(forbindelseTuple.Item1) },
+                    Til = new By() { Id = byRepository.GetIdFromName(forbindelseTuple.Item2) },
                     AntalSegmenter = forbindelseTuple.Item3
                 };
 
-                telstarForbindelseRepository.AddForbindelse(forbindelse);
+                telstarForbindelseRepository.Add(forbindelse);
             }
         }
     }
