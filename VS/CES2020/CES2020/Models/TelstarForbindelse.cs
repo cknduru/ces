@@ -13,7 +13,7 @@ namespace CES2020.Models
 
         public int AntalSegmenter { get; set; }
 
-        public void ComputePricesAndTimes(Konfiguration konfiguration)
+        public void ComputeBasePricesAndTimes(Konfiguration konfiguration)
         {
             this.Pris = this.AntalSegmenter * konfiguration.TelstarSegmentPris;
             this.Tid = this.AntalSegmenter * konfiguration.TelstarSegmentTid;
