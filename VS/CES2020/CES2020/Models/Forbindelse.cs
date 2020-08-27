@@ -7,7 +7,7 @@ namespace CES2020.Models
 {
     public class Forbindelse
     {
-        public int Ïd { get; set;}
+        public int Id { get; set;}
         public  float Pris { get; set; }
         public int Tid { get; set; }
         public By Fra { get; set;}
