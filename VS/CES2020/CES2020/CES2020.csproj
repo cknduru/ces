@@ -51,7 +51,13 @@
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Data.Linq" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Linq, Version=4.1.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Linq.4.3.0\lib\net463\System.Linq.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
@@ -166,6 +172,7 @@
     <Compile Include="Models\BeregnetRute.cs" />
     <Compile Include="Models\Bruger.cs" />
     <Compile Include="Models\By.cs" />
+    <Compile Include="Models\DbTelstarForbindelse.cs" />
     <Compile Include="Models\Enums\Enums.cs" />
     <Compile Include="Models\Forbindelse.cs" />
     <Compile Include="Models\Forsendelse.cs" />
@@ -179,7 +186,10 @@
     <Compile Include="Models\TelstarForbindelse.cs" />
     <Compile Include="Models\TelstarRute.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Repositories\BaseRepository.cs" />
     <Compile Include="Repositories\ByRepository.cs" />
+    <Compile Include="Repositories\DatabaseContext.cs" />
+    <Compile Include="Repositories\TelstarForbindelseRepository.cs" />
     <Compile Include="Services\AdministrationService.cs" />
     <Compile Include="Services\PrisadministrationService.cs" />
     <Compile Include="Services\RuteberegningService.cs" />
