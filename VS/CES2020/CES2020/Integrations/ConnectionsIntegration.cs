@@ -47,15 +47,14 @@ namespace CES2020.Integrs
         public List<ForbindelseDto> GetRoutes(Forsendelse forsendelse, string siteBase)
         {
             var forbindelser = new List<ForbindelseDto>();
-
             var json = JsonConvert.SerializeObject(ConvertToForsendelseDto(forsendelse));
             var res = GetExternalRoutes(siteBase, resource, json).Content;
 
             try
             {
                 // trim backets from start and end of JSON
-                var dto = JsonConvert.DeserializeObject<ForbindelseDto>(res.Substring(1, res.Length - 2));
-                forbindelser.Add(dto);
+                var dtos = JsonConvert.DeserializeObject<List<ForbindelseDto>>(res);
+                forbindelser.AddRange(dtos);
             }
             catch (Exception ex)
             {
