@@ -31,8 +31,8 @@ namespace CES2020.Services
 
         public IEnumerable<Forbindelse> GetCombinedForbindelser(Forsendelse forsendelse)
         {
-            var oceanicForbindelser = ConvertToForbindelser(connectionsIntegration.GetOceanicRoutes(new ForbindelseDto()), Enums.Forbindelsestype.Oceanic);
-            var eastIndiaForbindelser = ConvertToForbindelser(connectionsIntegration.GetEastIndiaTradingRoutes(), Enums.Forbindelsestype.EastIndia);
+            var oceanicForbindelser = ConvertToForbindelser(connectionsIntegration.GetOceanicRoutes(new Forsendelse()), Enums.Forbindelsestype.Oceanic);
+            var eastIndiaForbindelser = ConvertToForbindelser(connectionsIntegration.GetEastIndiaTradingRoutes(new Forsendelse()), Enums.Forbindelsestype.EastIndia);
 
             var possibleForbindelser = GetPossibleTelstarForbindelser(forsendelse).Select(f => f as Forbindelse);
             possibleForbindelser = possibleForbindelser.Concat(oceanicForbindelser);
