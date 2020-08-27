@@ -176,6 +176,9 @@
     <Compile Include="Models\Telstar forbindelse.cs" />
     <Compile Include="Models\Telstar Rute.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\AdministrationService.cs" />
+    <Compile Include="Services\PrisadministrationService.cs" />
+    <Compile Include="Services\RuteberegningService.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Areas\HelpPage\HelpPage.css" />
