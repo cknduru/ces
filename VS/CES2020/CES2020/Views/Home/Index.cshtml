@@ -2,7 +2,7 @@
 
 <div>
     <span>
-        <label for="fra">Fra:</label>
+        <label class="by" for="fra">Fra:</label>
         <select id='fra'>
             <option value="cairo">Cairo</option>
             <option value="Tenger">Tenger</option>
@@ -10,7 +10,7 @@
     </span>
 
     <span>
-        <label for="til">Til:</label>
+        <label class="by" for="til">Til:</label>
         <select id="til">
             <option value="cairo">Cairo</option>
             <option value="Tenger">Tenger</option>
@@ -18,7 +18,7 @@
     </span>
 
     <span>
-        <label for="dato">Dato:</label>
+        <label class="dato" for="dato">Dato:</label>
         <input type="date" id="dato" name="trip-start"
            min="2018-01-01" max="2100-12-31"/>
     </span>
@@ -26,40 +26,38 @@
 
 <div>
     <span>
-        <label for="rekomanderet">Gør pakken sporbar</label>
+        <label class="rekommanderet" for="rekomanderet">Gør pakken sporbar</label>
         <input type="checkbox" />
     </span>
 
     <span>
-        <label for="godstype">Set speciel godstype</label>
+        <label class="godstype" for="godstype">Set speciel godstype</label>
         <input id="godstype" type="checkbox" />
 
-        <div>
-            <span>
+        <div class="typer">
+            <div>
             <input id="frostvarer" type="checkbox" />
             <label for="frostvarer">Frostvarer</label>
-            </span>
+            </div>
 
             
-            <span>
+            <div>
             <input id="levendedyr" type="checkbox" />
             <label for="levendedyr">Levende dyt</label>
-            </span>
+            </div>
 
             
-            <span>
+            <div>
             <input id="eksplosiv" type="checkbox" />
             <label for="eksplosiv">Ekslosive pakker</label>
-            </span>
+            </div>
 
             
-            <span>
+            <div>
             <input id="skrøblig" type="checkbox" />
             <label for="skrøblig">Skrøblige pakker</label>
-            </span>
+            </div>
         </div>
-
     </span>
-
 </div>
 
