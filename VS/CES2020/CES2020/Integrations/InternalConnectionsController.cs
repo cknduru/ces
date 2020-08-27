@@ -7,6 +7,8 @@ using System.Web.Http;
 using CES2020.Integrs.dto;
 using CES2020.Models;
 using CES2020.Models.Enums;
+using CES2020.Repositories;
+using CES2020.Services;
 
 namespace CES2020.Integrs
 {
