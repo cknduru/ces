@@ -13,7 +13,7 @@ namespace CES2020.Repositories
     {
         private readonly DatabaseContext db;
 
-        ByRepository()
+        public ByRepository()
         {
             this.db = base.GetContext();
         }
@@ -21,7 +21,22 @@ namespace CES2020.Repositories
         public void AddBy(By by)
         {
 
-            db.Byer.InsertOnSubmit(new By(){Name = by.Name});
+            db.Byer.InsertOnSubmit(by);
+
+            try
+            {
+                db.SubmitChanges();
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw;
+            }
+        }
+
+        public void AddByer(IEnumerable<By> byer)
+        {
+            db.Byer.InsertAllOnSubmit(byer);
 
             try
             {
