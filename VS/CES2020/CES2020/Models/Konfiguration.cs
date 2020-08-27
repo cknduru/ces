@@ -13,13 +13,13 @@ namespace CES2020.Models
         public int Id { get; set; }
 
         [Column(Name = "REKOMMANDERETTILLAEG")]
-        public float RekommanderetTillaeg { get; set; }
+        public double RekommanderetTillaeg { get; set; }
 
         [Column(Name = "RABAT")]
         public int Rabat { get; set; }
 
         [Column(Name = "TELSTARSEGMENTPRIS")]
-        public float TelstarSegmentPris { get; set; }
+        public double TelstarSegmentPris { get; set; }
 
         [Column(Name = "MAXVAEGT")]
         public int MaxVaegt { get; set; }

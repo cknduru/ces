@@ -10,12 +10,13 @@ namespace CES2020.Models
     {
         private readonly ByRepository byRepository;
         private readonly TelstarForbindelseRepository telstarForbindelseRepository;
-
+        private readonly GodstypeRepository godstypeRepository;
 
         public DBSeed()
         {
             this.byRepository = new ByRepository();
             this.telstarForbindelseRepository = new TelstarForbindelseRepository();
+            this.godstypeRepository = new GodstypeRepository();
         }
 
         private readonly List<string> Byer = new List<string>()
@@ -143,6 +144,13 @@ namespace CES2020.Models
             ("Sahara","Darfur",8)
         };
 
+        private readonly List<Godstype> Godstyper = new List<Godstype>()
+        {
+            new Godstype() { Type = Enums.Enums.GodsType.ANI, Tillaeg = 50 },
+            new Godstype() { Type = Enums.Enums.GodsType.CAU, Tillaeg = 75 },
+            new Godstype() { Type = Enums.Enums.GodsType.REF, Tillaeg = 10 },
+        };
+
         public void SeedByer()
         {
             var byer = new List<By>();
@@ -168,6 +176,11 @@ namespace CES2020.Models
 
                 telstarForbindelseRepository.Add(forbindelse);
             }
+        }
+
+        public void SeedGodstyper()
+        {
+            godstypeRepository.AddMulitple(this.Godstyper);
         }
     }
 }

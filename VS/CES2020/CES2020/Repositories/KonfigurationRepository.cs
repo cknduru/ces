@@ -20,12 +20,27 @@ namespace CES2020.Repositories
 
         public Konfiguration Get()
         {
-            return _db.Konfigurations.First();
+            return _db.Konfigurations.Single();
         }
 
         public void Set(Konfiguration konfiguration)
         {
             _db.Konfigurations.InsertOnSubmit(konfiguration);
+
+            try
+            {
+                _db.SubmitChanges();
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw;
+            }
+        }
+
+        public void SetTelstarSegmentPris(double telstarSegmentPris)
+        {
+            _db.Konfigurations.Single().TelstarSegmentPris = telstarSegmentPris;
 
             try
             {
