@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using static CES2020.Models.Enums.Enums;
 
 namespace CES2020.Models
 {
@@ -10,9 +11,8 @@ namespace CES2020.Models
         public int Id { get; set;}
         public  float Pris { get; set; }
         public int Tid { get; set; }
-        public By Fra { get; set;}
-        public By Til { get; set; }
-        public Enums.Enums.Forbindelsestype ForbindelsesType { get; set; }
-
-}
+        public virtual By Fra { get; set;}
+        public virtual By Til { get; set; }
+        public Forbindelsestype ForbindelsesType { get; set; }
+    }
 }

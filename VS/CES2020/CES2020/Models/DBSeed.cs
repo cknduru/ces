@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using CES2020.Repositories;
 
 namespace CES2020.Models
 {
@@ -131,5 +132,19 @@ namespace CES2020.Models
             ("Sahara","Marrakesh",5),
             ("Sahara","Darfur",8)
         };
+
+        public void SeedByer()
+        {
+            var byRepository = new ByRepository();
+
+            var byer = new List<By>();
+
+            foreach (var byNavn in this.Byer)
+            {
+                byer.Add(new By() { Name = byNavn });
+            }
+
+            byRepository.AddByer(byer);
+        }
     }
 }
