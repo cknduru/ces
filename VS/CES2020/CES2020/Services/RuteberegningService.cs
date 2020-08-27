@@ -60,7 +60,7 @@ namespace CES2020.Services
             return possibleForbindelser;
         }
 
-        public IEnumerable<ForbindelseDto> GetForbindelseDtos(ForsendelseDto forsendelseDto)
+        public List<ForbindelseDto> GetForbindelseDtos(ForsendelseDto forsendelseDto)
         {
             var forsendelse = ConvertToForsendelse(forsendelseDto);
             var tillaeg = godstypeRepository.Get(forsendelse.Godstype).Tillaeg;
@@ -71,7 +71,7 @@ namespace CES2020.Services
                 To = f.Til.Name,
                 Price = (int)(f.Pris * tillaeg),
                 Duration = f.Tid
-            });
+            }).ToList();
         }
 
         public Forsendelse ConvertToForsendelse(ForsendelseDto forsendelse)

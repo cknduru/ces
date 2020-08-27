@@ -8,6 +8,7 @@ using CES2020.Integrations.dtos;
 using CES2020.Integrs.dto;
 using CES2020.Models;
 using CES2020.Models.Enums;
+using CES2020.Services;
 
 namespace CES2020.Integrs
 {
@@ -16,33 +17,9 @@ namespace CES2020.Integrs
         // POST api/connections
         public List<ForbindelseDto> Post([FromBody]ForsendelseDto value)
         {
-            /* test data
-             ConnectionsIntegration oc = new ConnectionsIntegration();
-            List<ForbindelseDto> x = oc.GetOceanicRoutes();
-            x.AddRange(oc.GetEastIndiaTradingRoutes());*/
+            var ruteberegningService = new RuteberegningService();
 
-            //Forsendelse f = new Forsendelse
-            //{
-            //    Forsendelsesdato = value.Forsendelsesdato,
-            //    Fra = value.Fra,
-            //    Til = value.Til,
-            //    Godstype = value.Godstype,
-            //    PakkeDimensioner = value.PakkeDimensioner,
-            //    Rekommanderet = value.Rekommanderet,
-            //    Vaegt = value.Vaegt
-            //};
-
-            // do something and return data
-            List<ForbindelseDto> brds = new List<ForbindelseDto>();
-            ForbindelseDto brd = new ForbindelseDto();
-            brd.Duration = 5;
-            brd.From = "Congo";
-            brd.To = "Niger";
-            brd.Price = 41;
-
-            brds.Add(brd);
-
-            return brds;
+            return ruteberegningService.GetForbindelseDtos(value);
         }
     }
 }
