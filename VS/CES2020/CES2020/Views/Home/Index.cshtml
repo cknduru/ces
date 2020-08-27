@@ -1,15 +1,24 @@
-﻿@page
+﻿<h2>Telstar Rute</h2>
 
+<span>
+    <label for="fra">Fra:</label>
+    <select id='fra'>
+        <option value="cairo">Cairo</option>
+        <option value="Tenger">Tenger</option>
+    </select>
+</span>
 
-<h2>Telstar Rute</h2>
+<span>
+    <label for="til">Til:</label>
+    <select id="til">
+        <option value="cairo">Cairo</option>
+        <option value="Tenger">Tenger</option>
+    </select>
+</span>
 
-<select>
-      <option value="cairo">Cairo</option>
-    <option value="Tenger">Tenger</option>
-</select>
-
-<select>
-    <option value="cairo">Cairo</option>
-    <option value="Tenger">Tenger</option>
-</select>
+<span>
+    <label for="dato">Dato:</label>
+    <input type="date" id="dato" name="trip-start"
+       min="2018-01-01" max="2100-12-31"/>
+</span>
 
