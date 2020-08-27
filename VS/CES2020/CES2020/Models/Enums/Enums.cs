@@ -12,8 +12,9 @@ namespace CES2020.Models.Enums
             ANI,
             EXP,
             CAU,
-            REF
-        } //Live animals, Explosive items, Cautious parcels, Refrigerated goods
+            REF,
+            WEP
+        } //Live animals, Explosive items, Cautious parcels, Refrigerated goods, Weapons
 
         public enum Forbindelsestype
         {

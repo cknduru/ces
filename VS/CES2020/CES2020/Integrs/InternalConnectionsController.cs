@@ -10,12 +10,12 @@ using CES2020.Models.Enums;
 
 namespace CES2020.Integrs
 {
-    public class ConnectionsController : ApiController
+    public class InternalConnectionsController : ApiController
     {
-        // POST api/connections
-        public List<BeregnetRuteDto> Post([FromBody]Forsendelse value)
+        // POST api/internalconnections
+        public List<BeregnetRuteInternalDto> Post([FromBody]Forsendelse value)
         {
-            List<BeregnetRuteDto> brds = new List<BeregnetRuteDto>();
+            List<BeregnetRuteInternalDto> brds = new List<BeregnetRuteInternalDto>();
 
             Forsendelse f = new Forsendelse
             {
@@ -29,12 +29,11 @@ namespace CES2020.Integrs
             };
 
             // do something and return data
-            BeregnetRuteDto brd = new BeregnetRuteDto();
-            brd.Duration = 5;
-            brd.From = "Congo";
-            brd.To = "Niger";
-            brd.Price = 41;
-
+            BeregnetRuteInternalDto brd = new BeregnetRuteInternalDto();
+            brd.Forsendelse = f;
+            brd.SamletTid = 18;
+            brd.Andel = 43;
+            brd.SamletPris = 321.5f;
             brds.Add(brd);
 
             return brds;
