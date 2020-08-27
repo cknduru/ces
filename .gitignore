@@ -31,7 +31,6 @@ VS/CES2020/.vs/CES2020/v16/.suo
 VS/CES2020/CES2020/obj/*
 VS/CES2020/CES2020/bin/*
 VS/CES2020/.vs/*
-VS/CES2020/CES2020.Tests/*
 VS/CES2020/CES2020/obj/Debug/DesignTimeResolveAssemblyReferencesInput.cache
 VS/CES2020/CES2020/CES2020.csproj.user
 VS/CES2020/CES2020.Tests/obj/Debug/CES2020.Tests.csprojAssemblyReference.cache
@@ -39,4 +38,7 @@ VS/CES2020/.vs/CES2020/v16/.suo
 VS/CES2020/.vs/CES2020/config/applicationhost.config
 VS/CES2020/CES2020/obj/Debug/CES2020.csprojAssemblyReference.cache
 VS/CES2020/CES2020/obj/Debug/DesignTimeResolveAssemblyReferencesInput.cache
+<<<<<<< HEAD
 >>>>>>> 70dc994... Update .gitignore
+=======
+>>>>>>> 01e56d3... E1 external integration
