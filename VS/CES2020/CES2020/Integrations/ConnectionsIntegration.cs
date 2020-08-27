@@ -66,7 +66,7 @@ namespace CES2020.Integrs
         }
 
 
-        private ForsendelseDto ConvertToForsendelseDto(Forsendelse forsendelse)
+        public ForsendelseDto ConvertToForsendelseDto(Forsendelse forsendelse)
         {
             return new ForsendelseDto()
             { 

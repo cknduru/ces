@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using CES2020.Integrations.dtos;
 using CES2020.Integrs;
 using CES2020.Integrs.dto;
 using CES2020.Models;
@@ -31,8 +32,8 @@ namespace CES2020.Services
 
         public IEnumerable<Forbindelse> GetCombinedForbindelser(Forsendelse forsendelse)
         {
-            var oceanicForbindelser = ConvertToForbindelser(connectionsIntegration.GetOceanicRoutes(new ForbindelseDto()), Enums.Forbindelsestype.Oceanic);
-            var eastIndiaForbindelser = ConvertToForbindelser(connectionsIntegration.GetEastIndiaTradingRoutes(), Enums.Forbindelsestype.EastIndia);
+            var oceanicForbindelser = ConvertToForbindelser(connectionsIntegration.GetOceanicRoutes(forsendelse), Enums.Forbindelsestype.Oceanic);
+            var eastIndiaForbindelser = ConvertToForbindelser(connectionsIntegration.GetEastIndiaTradingRoutes(forsendelse), Enums.Forbindelsestype.EastIndia);
 
             var possibleForbindelser = GetPossibleTelstarForbindelser(forsendelse).Select(f => f as Forbindelse);
             possibleForbindelser = possibleForbindelser.Concat(oceanicForbindelser);
@@ -59,8 +60,9 @@ namespace CES2020.Services
             return possibleForbindelser;
         }
 
-        public IEnumerable<ForbindelseDto> GetForbindelseDtos(Forsendelse forsendelse)
+        public IEnumerable<ForbindelseDto> GetForbindelseDtos(ForsendelseDto forsendelseDto)
         {
+            var forsendelse = ConvertToForsendelse(forsendelseDto);
             var tillaeg = godstypeRepository.Get(forsendelse.Godstype).Tillaeg;
 
             return GetPossibleTelstarForbindelser(forsendelse).Select(f => new ForbindelseDto()
@@ -70,6 +72,41 @@ namespace CES2020.Services
                 Price = (int)(f.Pris * tillaeg),
                 Duration = f.Tid
             });
+        }
+
+        public Forsendelse ConvertToForsendelse(ForsendelseDto forsendelse)
+        {
+            return new Forsendelse()
+            {
+                Godstype = GetGodsType(forsendelse.GoodsTypeIds.FirstOrDefault()),
+                Vaegt = forsendelse.Weight,
+                Forsendelsesdato = forsendelse.DeliveryDate,
+                PakkeDimensioner = new PakkeDimensioner()
+                {
+                    Bredde = forsendelse.Width,
+                    Hoejde = forsendelse.Height,
+                    Laengde = forsendelse.Length
+                }
+            };
+        }
+
+        public Enums.GodsType GetGodsType(string godstypeName)
+        {
+            switch (godstypeName)
+            {
+                case "REF":
+                    return Enums.GodsType.REF;
+                case "ANI":
+                    return Enums.GodsType.ANI;
+                case "CAU":
+                    return Enums.GodsType.CAU;
+                case "EXP":
+                    return Enums.GodsType.EXP;
+                case "WEP":
+                    return Enums.GodsType.WEP;
+                default:
+                    throw new ArgumentException($"Unknown Godstype {godstypeName}");
+            }
         }
 
         public IEnumerable<Forbindelse> ConvertToForbindelser(IEnumerable<ForbindelseDto> forbindelseDtos, Enums.Forbindelsestype forbindelsestype)
