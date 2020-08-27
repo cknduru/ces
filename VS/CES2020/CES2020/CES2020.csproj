@@ -45,6 +45,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Dijkstra.NET, Version=1.2.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Dijkstra.NET.1.2.1\lib\net40\Dijkstra.NET.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System" />
     <Reference Include="System.Data" />
@@ -168,14 +171,17 @@
     <Compile Include="Models\Forsendelse.cs" />
     <Compile Include="Models\Godstype.cs" />
     <Compile Include="Models\Konfiguration.cs" />
-    <Compile Include="Models\Pakke Dimensioner.cs" />
-    <Compile Include="Models\Rute Manager.cs" />
+    <Compile Include="Models\PakkeDimensioner.cs" />
+    <Compile Include="Models\RuteManager.cs" />
     <Compile Include="Models\RuteBeregner.cs" />
     <Compile Include="Models\Sikkerheds Manager.cs" />
     <Compile Include="Models\Sikkerhedsrolle.cs" />
-    <Compile Include="Models\Telstar forbindelse.cs" />
-    <Compile Include="Models\Telstar Rute.cs" />
+    <Compile Include="Models\TelstarForbindelse.cs" />
+    <Compile Include="Models\TelstarRute.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\AdministrationService.cs" />
+    <Compile Include="Services\PrisadministrationService.cs" />
+    <Compile Include="Services\RuteberegningService.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Areas\HelpPage\HelpPage.css" />
