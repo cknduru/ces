@@ -25,7 +25,7 @@ namespace CES2020.Integrs
                 Godstype = value.Godstype,
                 PakkeDimensioner = value.PakkeDimensioner,
                 Rekommanderet = value.Rekommanderet,
-                Vægt = value.Vægt
+                Vaegt = value.Vaegt
             };
 
             // do something and return data
