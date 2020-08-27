@@ -4,10 +4,10 @@ using static CES2020.Models.Enums.Enums;
 
 namespace CES2020.Models
 {
-    [Table(Name = "TelstarForbindelse")]
+    [Table(Name = "TELSTARFORBINDELSE")]
     public class DbTelstarForbindelse
     {
-        [Column(Name = "ID", IsPrimaryKey = true)]
+        [Column(Name = "ID", IsPrimaryKey = true, IsDbGenerated = true)]
         public int Id { get; set; }
 
         [Column(Name = "PRIS")]

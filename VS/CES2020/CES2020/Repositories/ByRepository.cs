@@ -48,5 +48,10 @@ namespace CES2020.Repositories
                 throw;
             }
         }
+
+        public int GetIdFromName(string name)
+        {
+            return db.Byer.Where(b => b.Name == name).Select(b => b.Id).FirstOrDefault();
+        }
     }
 }

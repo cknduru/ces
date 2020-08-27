@@ -8,6 +8,17 @@ namespace CES2020.Models
 {
     public class DBSeed
     {
+        private readonly ByRepository byRepository;
+        private readonly TelstarForbindelseRepository telstarForbindelseRepository;
+
+
+        public DBSeed()
+        {
+            this.byRepository = new ByRepository();
+            this.telstarForbindelseRepository = new TelstarForbindelseRepository();
+
+        }
+
         private List<string> Byer = new List<string>()
         {
             "Tanger",
@@ -135,8 +146,6 @@ namespace CES2020.Models
 
         public void SeedByer()
         {
-            var byRepository = new ByRepository();
-
             var byer = new List<By>();
 
             foreach (var byNavn in this.Byer)
@@ -145,6 +154,32 @@ namespace CES2020.Models
             }
 
             byRepository.AddByer(byer);
+        }
+
+        public void SeedForbindelser()
+        {
+            foreach (var forbindelseTuple in this.Forbindelser)
+            {
+                var fraId = byRepository.GetIdFromName(forbindelseTuple.Item1);
+                if (fraId == 0)
+                {
+                    throw new InvalidOperationException($"City with name {forbindelseTuple.Item1} not found");
+                }
+                var tilId = byRepository.GetIdFromName(forbindelseTuple.Item2);
+                if (tilId == 0)
+                {
+                    throw new InvalidOperationException($"City with name {forbindelseTuple.Item2} not found");
+                }
+
+                var forbindelse = new TelstarForbindelse()
+                {
+                    Fra = new By() {Id = fraId},
+                    Til = new By() { Id = tilId},
+                    AntalSegmenter = forbindelseTuple.Item3
+                };
+
+                telstarForbindelseRepository.AddForbindelse(forbindelse);
+            }
         }
     }
 }
