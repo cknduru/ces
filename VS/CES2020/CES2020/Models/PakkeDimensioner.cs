@@ -5,7 +5,7 @@ using System.Web;
 
 namespace CES2020.Models
 {
-    public class Pakke_Dimensioner
+    public class PakkeDimensioner
     {
         public int Højde { get; set; }
         public int Brede { get; set; }
