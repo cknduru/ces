@@ -1,4 +1,12 @@
-﻿<h2>Telstar Rute</h2>
+﻿<div>
+    <h2>Telstar Rute</h2>
+
+    <span>
+        <button>Pris Administration</button>
+    </span>
+
+</div>
+
 
 <div>
     <span>
@@ -25,39 +33,15 @@
 </div>
 
 <div>
-    <span>
-        <label class="rekommanderet" for="rekomanderet">Gør pakken sporbar</label>
-        <input type="checkbox" />
-    </span>
-
-    <div>
-        <label class="godstype" for="godstype">Set speciel godstype</label>
-        <input id="godstype" type="checkbox" />
-
-        <div class="typer">
-            <div>
-            <input id="frostvarer" type="checkbox" />
-            <label for="frostvarer">Frostvarer</label>
-            </div>
-
-            
-            <div>
-            <input id="levendedyr" type="checkbox" />
-            <label for="levendedyr">Levende dyt</label>
-            </div>
-
-            
-            <div>
-            <input id="eksplosiv" type="checkbox" />
-            <label for="eksplosiv">Ekslosive pakker</label>
-            </div>
-
-            
-            <div>
-            <input id="skrøblig" type="checkbox" />
-            <label for="skrøblig">Skrøblige pakker</label>
-            </div>
-        </div>
+        <label for="godstyper">Vælg speciel godstype:</label>
+            <select id='godstyper'>
+                <option value="">ingen</option>
+            <option value="frostvarer">Frostvarer</option>
+            <option value="eksplosivevarer">Eksplosive varer</option>
+            <option value="levendedyr">Levende dyr</option>
+            <option value="skrøbelig">Skrøbelige varer</option>
+        </select>
+      
     </div>
 </div>
 
