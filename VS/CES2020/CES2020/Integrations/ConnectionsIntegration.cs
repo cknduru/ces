@@ -34,14 +34,19 @@ namespace CES2020.Integrs
             return client.Execute(request);
         }
 
-        public List<ForbindelseDto> GetOceanicRoutes()
+        public List<ForbindelseDto> GetOceanicRoutes(ForbindelseDto forbindelse)
         {
             List<ForbindelseDto> brds = new List<ForbindelseDto>();
             Forsendelse f = new Forsendelse();
 
             f.Forsendelsesdato = DateTime.Now;
-            f.Fra = new By();
-            f.Til = new By();
+            By b = new By();
+            By b1 = new By();
+            b.Name = forbindelse.From;
+            b1.Name = forbindelse.To;
+
+            f.Fra = b;
+            f.Til = b1;
             f.Godstype = Enums.GodsType.EXP;
             f.PakkeDimensioner = new PakkeDimensioner();
             f.Rekommanderet = false;
