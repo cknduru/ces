@@ -4,7 +4,7 @@ using System.Linq;
 using System.Web;
 using CES2020.Models;
 
-namespace CES2020.Integrations.dto
+namespace CES2020.Integration.dto
 {
     public class BeregnetRuteDto
     {

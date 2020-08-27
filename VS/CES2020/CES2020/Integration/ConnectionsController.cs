@@ -4,11 +4,12 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
-using CES2020.Integrations.dto;
+using CES2020.Integration.dto;
+using CES2020.Integration.dto;
 using CES2020.Models;
 using CES2020.Models.Enums;
 
-namespace CES2020.Integrations
+namespace CES2020.Integration
 {
     public class ConnectionsController : ApiController
     {
