@@ -12,7 +12,7 @@ namespace CES2020.Integrs
     {
         private static readonly HttpClient client = new HttpClient();
 
-        public List<BeregnetRute> GetOceanicRoutes()
+        public List<BeregnetRuteDto> GetOceanicRoutes()
         {
             /*var values = new Dictionary<string, string>
             {
@@ -26,20 +26,21 @@ namespace CES2020.Integrs
 
             var responseString = await response.Content.ReadAsStringAsync();*/
 
-            List<BeregnetRute> brds = new List<BeregnetRute>();
+            List<BeregnetRuteDto> brds = new List<BeregnetRuteDto>();
 
             // do something and return data
-            BeregnetRute brd = new BeregnetRute();
-            brd.Andel = 32;
-            brd.Forsendelse = new Forsendelse();
-            brd.SamletPris = 2.3f;
-            brd.SamletTid = 32;
+            BeregnetRuteDto brd = new BeregnetRuteDto();
+            brd.Duration = 5;
+            brd.From = "Congo";
+            brd.To = "Niger";
+            brd.Price = 41;
+
             brds.Add(brd);
 
             return brds;
         }
 
-        public List<BeregnetRute> GetEastIndiaTradingRoutes()
+        public List<BeregnetRuteDto> GetEastIndiaTradingRoutes()
         {
             /*var values = new Dictionary<string, string>
             {
@@ -53,14 +54,15 @@ namespace CES2020.Integrs
 
             var responseString = await response.Content.ReadAsStringAsync();*/
 
-            List<BeregnetRute> brds = new List<BeregnetRute>();
+            List<BeregnetRuteDto> brds = new List<BeregnetRuteDto>();
 
             // do something and return data
-            BeregnetRute brd = new BeregnetRute();
-            brd.Andel = 32;
-            brd.Forsendelse = new Forsendelse();
-            brd.SamletPris = 2.3f;
-            brd.SamletTid = 32;
+            BeregnetRuteDto brd = new BeregnetRuteDto();
+            brd.Duration = 5;
+            brd.From = "Congo";
+            brd.To = "Niger";
+            brd.Price = 41;
+
             brds.Add(brd);
 
             return brds;
