@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using static CES2020.Models.Enums.Enums;
 
 namespace CES2020.Models
 {
@@ -10,7 +11,7 @@ namespace CES2020.Models
         public By Fra { get; set; }
         public By Til { get; set; }
         public bool Rekommanderet { get; set; }
-        public Enums.Enums.GodsType Godstype { get; set; }
+        public GodsType Godstype { get; set; }
         public int Vægt { get; set; }
         public DateTime Forsendelsesdato { get; set; }
         public PakkeDimensioner PakkeDimensioner { get; set; }
