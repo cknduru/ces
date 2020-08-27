@@ -15,12 +15,17 @@ namespace CES2020.Models.Enums
             REF
         } //Live animals, Explosive items, Cautious parcels, Refrigerated goods
 
-        public enum forbindelsestype
+        public enum Forbindelsestype
         {
             Telstar, 
             Oceanic, 
             EastIndia
         }
-        
+        public enum Sikkerhedsrolle
+        {
+            Admin,
+            PrisAdmin,
+            Booker
+        }
 }
 }

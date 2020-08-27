@@ -161,6 +161,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\BeregnetRute.cs" />
+    <Compile Include="Models\Bruger.cs" />
     <Compile Include="Models\By.cs" />
     <Compile Include="Models\Enums\Enums.cs" />
     <Compile Include="Models\Forbindelse.cs" />
@@ -170,7 +171,10 @@
     <Compile Include="Models\Pakke Dimensioner.cs" />
     <Compile Include="Models\Rute Manager.cs" />
     <Compile Include="Models\RuteBeregner.cs" />
+    <Compile Include="Models\Sikkerheds Manager.cs" />
+    <Compile Include="Models\Sikkerhedsrolle.cs" />
     <Compile Include="Models\Telstar forbindelse.cs" />
+    <Compile Include="Models\Telstar Rute.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

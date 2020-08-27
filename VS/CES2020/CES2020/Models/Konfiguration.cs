@@ -7,10 +7,10 @@ namespace CES2020.Models
 {
     public class Konfiguration
     {
-        private float RekommanderetTilæg { get; set; }
-        private int Rabat { get; set; }
-        private float TelstarSegmentPris { get; set; }
-        private int MaxVægt { get; set; }
+        public float RekommanderetTilæg { get; set; }
+        public int Rabat { get; set; }
+        public float TelstarSegmentPris { get; set; }
+        public int MaxVægt { get; set; }
 
     }
 }

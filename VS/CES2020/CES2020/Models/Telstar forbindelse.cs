@@ -7,8 +7,8 @@ namespace CES2020.Models
 {
     public class Telstar_forbindelse
     {
-        private DateTime Udløbsdato { get; set; }
-        private int AntalSegmenter { get; set; }
+        public DateTime Udløbsdato { get; set; }
+        public int AntalSegmenter { get; set; }
 
     }
 }

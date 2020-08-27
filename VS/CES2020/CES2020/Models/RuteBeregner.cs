@@ -7,7 +7,7 @@ namespace CES2020.Models
 {
     public class RuteBeregner
     {
-        private List<BeregnetRute> BeregnRuter(Forbindelse)
+        public List<BeregnetRute> BeregnRuter(Forbindelse)
         {
 
         };
