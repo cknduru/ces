@@ -17,29 +17,38 @@ namespace CES2020.Services
         private readonly TelstarForbindelseRepository telstarForbindelseRepository;
         private readonly ConnectionsIntegration connectionsIntegration;
         private readonly ByRepository byRepository;
+        private readonly Konfiguration konfiguration;
 
         public RuteberegningService()
         {
             this.byRepository = new ByRepository();
             this.telstarForbindelseRepository = new TelstarForbindelseRepository();
             this.connectionsIntegration = new ConnectionsIntegration();
+            this.konfiguration = new KonfigurationRepository().Get();
         }
 
         public IEnumerable<Forbindelse> GetPossibleForbindelser(Forsendelse forsendelse)
         {
-            var oceanicForbindelser = ConvertToForbindelser(connectionsIntegration.GetOceanicRoutes(), Enums.Forbindelsestype.Oceanic);
-            var eastIndiaForbindelser = ConvertToForbindelser(connectionsIntegration.GetEastIndiaTradingRoutes(), Enums.Forbindelsestype.EastIndia);
+            var possibleForbindelser = Enumerable.Empty<Forbindelse>();
+
+            if (forsendelse.Vaegt >= this.konfiguration.MaxVaegt) return possibleForbindelser;
+
+            var oceanicForbindelser = ConvertToForbindelser(connectionsIntegration.GetOceanicRoutes(),
+                Enums.Forbindelsestype.Oceanic);
+            var eastIndiaForbindelser = ConvertToForbindelser(connectionsIntegration.GetEastIndiaTradingRoutes(),
+                Enums.Forbindelsestype.EastIndia);
 
             var telstarForbindelser = telstarForbindelseRepository.GetAll();
-            var konfiguration = new Konfiguration();
 
             foreach (var forbindelse in telstarForbindelser)
             {
                 forbindelse.ComputePricesAndTimes(konfiguration);
             }
-            
-            var possibleForbindelser = telstarForbindelser.Where(f => f.Udløbsdato == null || f.Udløbsdato > forsendelse.Forsendelsesdato).Select(f => f as Forbindelse);
-            
+
+            possibleForbindelser = telstarForbindelser
+                .Where(f => f.Udløbsdato == null || f.Udløbsdato > forsendelse.Forsendelsesdato)
+                .Select(f => f as Forbindelse);
+
             possibleForbindelser = possibleForbindelser.Concat(oceanicForbindelser);
             possibleForbindelser = possibleForbindelser.Concat(eastIndiaForbindelser);
 

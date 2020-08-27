@@ -12,7 +12,7 @@ namespace CES2020.Models
         public By Til { get; set; }
         public bool Rekommanderet { get; set; }
         public GodsType Godstype { get; set; }
-        public int Vægt { get; set; }
+        public int Vaegt { get; set; }
         public DateTime Forsendelsesdato { get; set; }
         public PakkeDimensioner PakkeDimensioner { get; set; }
 

@@ -195,6 +195,7 @@
     <Compile Include="Repositories\BaseRepository.cs" />
     <Compile Include="Repositories\ByRepository.cs" />
     <Compile Include="Repositories\DatabaseContext.cs" />
+    <Compile Include="Repositories\KonfigurationRepository.cs" />
     <Compile Include="Repositories\TelstarForbindelseRepository.cs" />
     <Compile Include="Services\AdministrationService.cs" />
     <Compile Include="Services\PrisadministrationService.cs" />

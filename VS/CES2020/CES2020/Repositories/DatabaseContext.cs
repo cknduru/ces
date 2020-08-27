@@ -10,5 +10,7 @@ namespace CES2020.Repositories
         public Table<DbTelstarForbindelse> TelstarForbindelser;
 
         public Table<By> Byer;
+
+        public Table<Konfiguration> Konfigurations;
     }
 }
