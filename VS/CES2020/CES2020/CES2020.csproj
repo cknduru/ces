@@ -169,6 +169,11 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Integrations\ConnectionsController.cs" />
+    <Compile Include="Integrations\ConnectionsIntegration.cs" />
+    <Compile Include="Integrations\dtos\BeregnetRuteDto.cs" />
+    <Compile Include="Integrations\dtos\BeregnetRuteInternalDto.cs" />
+    <Compile Include="Integrations\InternalConnectionsController.cs" />
     <Compile Include="Models\BeregnetRute.cs" />
     <Compile Include="Models\Bruger.cs" />
     <Compile Include="Models\By.cs" />
