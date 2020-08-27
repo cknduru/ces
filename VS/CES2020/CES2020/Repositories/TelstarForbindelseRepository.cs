@@ -13,12 +13,12 @@ namespace CES2020.Repositories
     {
         private readonly DatabaseContext db;
 
-        TelstarForbindelseRepository()
+        public TelstarForbindelseRepository()
         {
             this.db = base.GetContext();
         }
 
-        public void AddForbindelse(TelstarForbindelse forbindelse)
+        public void Add(TelstarForbindelse forbindelse)
         {
             var dbForbindelse = new DbTelstarForbindelse()
             {
@@ -42,6 +42,18 @@ namespace CES2020.Repositories
                 Console.WriteLine(e);
                 throw;
             }
+        }
+
+        public IEnumerable<TelstarForbindelse> GetAll()
+        {
+            return db.TelstarForbindelser.Select(f => new TelstarForbindelse()
+            {
+                Id = f.Id,
+                Fra = db.Byer.FirstOrDefault(b => b.Id == f.FraId),
+                Til = db.Byer.FirstOrDefault(b => b.Id == f.TilId),
+                AntalSegmenter = f.AntalSegmenter,
+                Udløbsdato = f.Udløbsdato,
+            }).AsEnumerable();
         }
     }
 }
