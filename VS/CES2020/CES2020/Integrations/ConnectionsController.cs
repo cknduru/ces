@@ -27,6 +27,7 @@ namespace CES2020.Integrs
             };
 
             // do something and return data
+            List<ForbindelseDto> brds = new List<ForbindelseDto>();
             ForbindelseDto brd = new ForbindelseDto();
             brd.Duration = 5;
             brd.From = "Congo";
