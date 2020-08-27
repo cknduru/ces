@@ -17,31 +17,42 @@ namespace CES2020.Services
         private readonly TelstarForbindelseRepository telstarForbindelseRepository;
         private readonly ConnectionsIntegration connectionsIntegration;
         private readonly ByRepository byRepository;
+        private readonly Konfiguration konfiguration;
 
         public RuteberegningService()
         {
             this.byRepository = new ByRepository();
             this.telstarForbindelseRepository = new TelstarForbindelseRepository();
             this.connectionsIntegration = new ConnectionsIntegration();
+            this.konfiguration = new KonfigurationRepository().Get();
         }
 
-        public IEnumerable<Forbindelse> GetPossibleForbindelser(Forsendelse forsendelse)
+        public IEnumerable<Forbindelse> GetCombinedForbindelser(Forsendelse forsendelse)
         {
             var oceanicForbindelser = ConvertToForbindelser(connectionsIntegration.GetOceanicRoutes(), Enums.Forbindelsestype.Oceanic);
             var eastIndiaForbindelser = ConvertToForbindelser(connectionsIntegration.GetEastIndiaTradingRoutes(), Enums.Forbindelsestype.EastIndia);
 
+            var possibleForbindelser = GetPossibleTelstarForbindelser(forsendelse).Select(f => f as Forbindelse);
+            possibleForbindelser = possibleForbindelser.Concat(oceanicForbindelser);
+            possibleForbindelser = possibleForbindelser.Concat(eastIndiaForbindelser);
+
+            return possibleForbindelser;
+        }
+
+        public IEnumerable<TelstarForbindelse> GetPossibleTelstarForbindelser(Forsendelse forsendelse)
+        {
+            var possibleForbindelser = Enumerable.Empty<TelstarForbindelse>();
+
+            if (forsendelse.Vaegt >= this.konfiguration.MaxVaegt) return possibleForbindelser;
+
             var telstarForbindelser = telstarForbindelseRepository.GetAll();
-            var konfiguration = new Konfiguration();
 
             foreach (var forbindelse in telstarForbindelser)
             {
                 forbindelse.ComputePricesAndTimes(konfiguration);
             }
-            
-            var possibleForbindelser = telstarForbindelser.Where(f => f.Udløbsdato == null || f.Udløbsdato > forsendelse.Forsendelsesdato).Select(f => f as Forbindelse);
-            
-            possibleForbindelser = possibleForbindelser.Concat(oceanicForbindelser);
-            possibleForbindelser = possibleForbindelser.Concat(eastIndiaForbindelser);
+
+            possibleForbindelser = telstarForbindelser.Where(f => f.Udløbsdato == null || f.Udløbsdato > forsendelse.Forsendelsesdato);
 
             return possibleForbindelser;
         }
