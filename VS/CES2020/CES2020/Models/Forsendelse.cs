@@ -13,7 +13,7 @@ namespace CES2020.Models
         public Enums.Enums.GodsType Godstype { get; set; }
         public int Vægt { get; set; }
         public DateTime Forsendelsesdato { get; set; }
-        public Pakke_Dimensioner PakkeDimensioner { get; set; }
+        public PakkeDimensioner PakkeDimensioner { get; set; }
 
     }
 }

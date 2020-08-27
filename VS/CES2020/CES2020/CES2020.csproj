@@ -168,13 +168,13 @@
     <Compile Include="Models\Forsendelse.cs" />
     <Compile Include="Models\Godstype.cs" />
     <Compile Include="Models\Konfiguration.cs" />
-    <Compile Include="Models\Pakke Dimensioner.cs" />
-    <Compile Include="Models\Rute Manager.cs" />
+    <Compile Include="Models\PakkeDimensioner.cs" />
+    <Compile Include="Models\RuteManager.cs" />
     <Compile Include="Models\RuteBeregner.cs" />
     <Compile Include="Models\Sikkerheds Manager.cs" />
     <Compile Include="Models\Sikkerhedsrolle.cs" />
-    <Compile Include="Models\Telstar forbindelse.cs" />
-    <Compile Include="Models\Telstar Rute.cs" />
+    <Compile Include="Models\TelstarForbindelse.cs" />
+    <Compile Include="Models\TelstarRute.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
