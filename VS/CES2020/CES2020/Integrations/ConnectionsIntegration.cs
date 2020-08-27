@@ -84,7 +84,7 @@ namespace CES2020.Integrs
             try
             {
                 // trim backets from start and end of JSON
-                dto = JsonConvert.DeserializeObject<ForbindelseDto>(res.Substring(1, res.Length - 2));
+                dto = JsonConvert.DeserializeObject<ForbindelseDto>(res);
                 brds.Add(dto);
             }
             catch (Exception ex)

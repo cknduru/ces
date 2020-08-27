@@ -15,6 +15,11 @@ namespace CES2020.Integrs
         // POST api/connections
         public List<ForbindelseDto> Post([FromBody]Forsendelse value)
         {
+            /* test data
+             ConnectionsIntegration oc = new ConnectionsIntegration();
+            List<ForbindelseDto> x = oc.GetOceanicRoutes();
+            x.AddRange(oc.GetEastIndiaTradingRoutes());*/
+
             Forsendelse f = new Forsendelse
             {
                 Forsendelsesdato = value.Forsendelsesdato,
