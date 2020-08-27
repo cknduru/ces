@@ -41,7 +41,7 @@ namespace CES2020.Integrs
 
         public List<ForbindelseDto> GetEastIndiaTradingRoutes(Forsendelse forsendelse)
         {
-            return GetRoutes(forsendelse, oceanicSiteBase);
+            return GetRoutes(forsendelse, eastIndiaSiteBase);
         }
 
         public List<ForbindelseDto> GetRoutes(Forsendelse forsendelse, string siteBase)
