@@ -12,6 +12,13 @@
 *.user
 *.sln.docstates
 
+*.suo
+*.user
+_ReSharper.*
+bin
+obj
+packages
+
 # Build results
 [Dd]ebug/
 [Rr]elease/
