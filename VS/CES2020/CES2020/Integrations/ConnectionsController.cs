@@ -15,8 +15,10 @@ namespace CES2020.Integrs
         // POST api/connections
         public List<BeregnetRuteDto> Post([FromBody]Forsendelse value)
         {
+            ConnectionsIntegration oc = new ConnectionsIntegration();
+            oc.GetOceanicRoutes();
             List<BeregnetRuteDto> brds = new List<BeregnetRuteDto>();
-
+            
             Forsendelse f = new Forsendelse
             {
                 Forsendelsesdato = value.Forsendelsesdato,
