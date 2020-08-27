@@ -7,12 +7,12 @@ namespace CES2020.Models
 {
     public class Rute_Manager
     {
-        private RuteBeregner RuteBeregner()
+        public RuteBeregner RuteBeregner()
         {
 
         }
 
-        private Konfiguration Konfiguration()
+        public Konfiguration Konfiguration()
         {
 
         }

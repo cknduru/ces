@@ -7,13 +7,13 @@ namespace CES2020.Models
 {
     public class Forsendelse
     {
-        private By Fra { get; set; }
-        private By Til { get; set; }
-        private bool Rekommanderet { get; set; }
-        private Enums.Enums.GodsType Godstype { get; set; }
-        private int Vægt { get; set; }
-        private DateTime Forsendelsesdato { get; set; }
-        private Pakke_Dimensioner PakkeDimensioner { get; set; }
+        public By Fra { get; set; }
+        public By Til { get; set; }
+        public bool Rekommanderet { get; set; }
+        public Enums.Enums.GodsType Godstype { get; set; }
+        public int Vægt { get; set; }
+        public DateTime Forsendelsesdato { get; set; }
+        public Pakke_Dimensioner PakkeDimensioner { get; set; }
 
     }
 }

@@ -7,8 +7,8 @@ namespace CES2020.Models
 {
     public class Pakke_Dimensioner
     {
-        private int Højde { get; set; }
-        private int Brede { get; set; }
-        private int længde { get; set; }
+        public int Højde { get; set; }
+        public int Brede { get; set; }
+        public int længde { get; set; }
     }
 }

@@ -7,11 +7,11 @@ namespace CES2020.Models
 {
     public class BeregnetRute
     {
-        private float SamletPris { get; set; }
-        private int SamletTid { get; set; }
-        private int Andel { get; set; }
-        private Forsendelse Forsendelse { get; set; }
-        private int Id { get; set; }
+        public float SamletPris { get; set; }
+        public int SamletTid { get; set; }
+        public int Andel { get; set; }
+        public Forsendelse Forsendelse { get; set; }
+        public int Id { get; set; }
 
     }
 }

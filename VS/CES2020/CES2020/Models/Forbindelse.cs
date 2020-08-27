@@ -7,13 +7,12 @@ namespace CES2020.Models
 {
     public class Forbindelse
     {
-        private int Ïd { get; set;}
-        private  float Pris { get; set; }
-        private int Tid { get; set; }
-        private By Fra { get; set;}
-        private By Til { get; set; }
+        public int Ïd { get; set;}
+        public  float Pris { get; set; }
+        public int Tid { get; set; }
+        public By Fra { get; set;}
+        public By Til { get; set; }
+        public Enums.Enums.Forbindelsestype ForbindelsesType { get; set; }
 
-        priate 
-        
 }
 }
