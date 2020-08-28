@@ -18,10 +18,10 @@ namespace CES2020.Controllers
         }
 
         [HttpPost]
-        public ActionResult Index(ForbindelseDto ff)
+        public ActionResult Index(Forsendelse ff)
         {
             ConnectionsIntegration oc = new ConnectionsIntegration();
-            List<ForbindelseDto> ocean = oc.GetOceanicRoutes(ff);
+            List<ForbindelseDto> ocean = oc.GetRoutes(ff, "");
             Forsendelse fors = new Forsendelse();
             ForbindelseDto fb = new ForbindelseDto();
             fb.To = ocean[0].To;

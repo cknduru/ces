@@ -13,18 +13,22 @@
         </div>
         <div class="editor-field">
             @Html.TextBoxFor(model => Model.From)
-        </div>
+        </div><br />
+
         <div class="editor-label">
-            <div style="float: left;">
-                @Html.TextBoxFor(model => Model.To)
-            </div>
             @Html.LabelFor(model => Model.To)
         </div>
-        <span>
+        <div class="editor-field">
+            @Html.TextBoxFor(model => Model.To)
+        </div><br />
+
+
+
+
+        <div>
             <label class="dato" for="dato">Dato:</label>
-        <input type="date" id="dato" name="trip-start" >
-                   min="2018-01-01" max="2100-12-31">@Html.TextBoxFor(model => Model.To)/>
-            </span>
+        <input type="date" id="dato" name="trip-start" min="2018-01-01" max="2100-12-31">@Html.TextBoxFor(model => Model.To)
+            </div>
     </fieldset>
     <input type="submit" value="Søg" />
 
