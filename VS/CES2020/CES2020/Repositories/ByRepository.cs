@@ -49,6 +49,11 @@ namespace CES2020.Repositories
             }
         }
 
+        public IEnumerable<By> Get()
+        {
+            return db.Byer.AsEnumerable();
+        }
+
         public int GetIdFromName(string name)
         {
             var id = db.Byer.Where(b => b.Name == name).Select(b => b.Id).FirstOrDefault();
