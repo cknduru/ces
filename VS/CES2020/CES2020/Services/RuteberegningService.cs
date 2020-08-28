@@ -30,6 +30,24 @@ namespace CES2020.Services
             this.godstypeRepository = new GodstypeRepository();
         }
 
+        public List<BeregnetRuteInternalDto> GetBeregnedeRuter(Forsendelse forsendelse)
+        {
+            var forbindelser = GetCombinedForbindelser(forsendelse);
+            var beregnetRuter = GetBeregnetRuter(forbindelser.ToList(), byRepository.Get().ToList(), forsendelse);
+
+
+            var beregnetRuteDtos = beregnetRuter.Select(b => new BeregnetRuteInternalDto()
+            {
+                Forbindelser = ConvertToForbindelseDtos(forbindelser).ToList(),
+                Andel = b.Andel,
+                SamletPris = b.SamletPris,
+                SamletTid = b.SamletTid,
+                Forsendelse = b.Forsendelse
+            });
+
+            return beregnetRuteDtos.ToList();
+        }
+
         public IEnumerable<Forbindelse> GetCombinedForbindelser(Forsendelse forsendelse)
         {
             var oceanicForbindelser = ConvertToForbindelser(connectionsIntegration.GetOceanicRoutes(forsendelse), Enums.Forbindelsestype.Oceanic);
@@ -113,6 +131,18 @@ namespace CES2020.Services
                 default:
                     throw new ArgumentException($"Unknown Godstype {godstypeName}");
             }
+        }
+
+        public IEnumerable<ForbindelseDto> ConvertToForbindelseDtos(IEnumerable<Forbindelse> forbindelser)
+        {
+            return forbindelser.Select(f => new ForbindelseDto()
+            {
+                Duration = f.Tid,
+                From = f.Fra.Name,
+                To = f.Til.Name,
+                Price = (int) f.Pris,
+                Type = f.ForbindelsesType
+            });
         }
 
         public IEnumerable<Forbindelse> ConvertToForbindelser(IEnumerable<ForbindelseDto> forbindelseDtos, Enums.Forbindelsestype forbindelsestype)

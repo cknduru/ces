@@ -12,5 +12,6 @@ namespace CES2020.Integrs.dto
         public int SamletTid { get; set; }
         public int Andel { get; set; }
         public Forsendelse Forsendelse { get; set; }
+        public List<ForbindelseDto> Forbindelser { get; set; }
     }
 }
