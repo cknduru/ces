@@ -1,0 +1,18 @@
+﻿@model CES2020.Models.Konfiguration
+
+@{
+    ViewBag.Title = "PrisAdmin";
+}
+
+@using (Html.BeginForm())
+{
+    <fieldset>
+    <legend>Product</legend>
+    <div class="editor-label">
+        @Html.Label("Telstar Segment Pris", "Pris pr. segment i $")
+        @Html.TextBox("Telstar Segment Pris", Model.TelstarSegmentPris)
+
+    </div>
+    </fieldset>
+    <input type="submit" value="Opdater" />
+}
