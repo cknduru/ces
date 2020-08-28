@@ -14,19 +14,21 @@ namespace CES2020.Controllers
         [HttpGet]
         public ActionResult Index()
         {
-            return View(new ForbindelseDto());
+            return View(new Forsendelse());
         }
 
         [HttpPost]
         public ActionResult Index(Forsendelse ff)
         {
-            ConnectionsIntegration oc = new ConnectionsIntegration();
-            List<ForbindelseDto> ocean = oc.GetRoutes(ff, "");
-            Forsendelse fors = new Forsendelse();
-            ForbindelseDto fb = new ForbindelseDto();
-            fb.To = ocean[0].To;
-            fb.From = ocean[0].From;
-            return View(fb);
+            ff.Forsendelsesdato = new DateTime();
+
+            Console.OpenStandardOutput();
+            Console.WriteLine(ff);
+
+
+            return View(ff);
+
+
         }
     }
 }
