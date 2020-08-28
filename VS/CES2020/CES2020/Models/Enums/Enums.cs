@@ -9,6 +9,7 @@ namespace CES2020.Models.Enums
     {
         public enum GodsType
         {
+            DEFAULT,
             ANI,
             EXP,
             CAU,
