@@ -12,6 +12,7 @@ namespace CES2020.Models
         public int Andel { get; set; }
         public Forsendelse Forsendelse { get; set; }
         public int Id { get; set; }
+        public IEnumerable<Forbindelse> Forbindelser { get; set; }
 
     }
 }
