@@ -6,6 +6,7 @@ using System.Web.Mvc;
 using CES2020.Integrs;
 using CES2020.Integrs.dto;
 using CES2020.Models;
+using CES2020.Services;
 
 namespace CES2020.Controllers
 {
@@ -22,12 +23,11 @@ namespace CES2020.Controllers
         {
             ff.Forsendelsesdato = new DateTime();
 
-            Console.OpenStandardOutput();
-            Console.WriteLine(ff);
+            RuteberegningService rbs = new RuteberegningService();
 
+            rbs.GetBeregnedeRuter(ff);
 
             return View(ff);
-
 
         }
     }
