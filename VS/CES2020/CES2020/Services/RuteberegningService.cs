@@ -98,6 +98,8 @@ namespace CES2020.Services
         {
             switch (godstypeName)
             {
+                case "":
+                    return Enums.GodsType.DEFAULT;
                 case "REF":
                     return Enums.GodsType.REF;
                 case "ANI":

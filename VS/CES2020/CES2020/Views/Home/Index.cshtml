@@ -1,4 +1,4 @@
-﻿@model CES2020.Integrs.dto.ForbindelseDto
+﻿@model CES2020.Models.Forsendelse
 
 @{
     ViewBag.Title = "Index";
@@ -9,31 +9,69 @@
     <fieldset>
         <legend>Product</legend>
         <div class="editor-label">
-            @Html.LabelFor(model => Model.From)
+            @Html.LabelFor(model => Model.Fra.Name)
         </div>
         <div class="editor-field">
-            @Html.TextBoxFor(model => Model.From)
+            @Html.TextBoxFor(model => Model.Fra.Name)
         </div><br />
 
         <div class="editor-label">
-            @Html.LabelFor(model => Model.To)
+            @Html.LabelFor(model => Model.Til.Name)
         </div>
         <div class="editor-field">
-            @Html.TextBoxFor(model => Model.To)
+            @Html.TextBoxFor(model => Model.Til.Name);
         </div><br />
 
-
-
+        <div class="editor-label">
+            @Html.LabelFor(model => Model.Rekommanderet)
+        </div>
+        <div class="editor-field">
+            @Html.CheckBoxFor(modal => Model.Rekommanderet)
+        </div>
+        <br />
+        <br />
 
         <div>
-            <label class="dato" for="dato">Dato:</label>
-        <input type="date" id="dato" name="trip-start" min="2018-01-01" max="2100-12-31">@Html.TextBoxFor(model => Model.To)
+            <div class="editor-label">
+                @Html.LabelFor(model => Model.PakkeDimensioner.Bredde);
             </div>
+            <div>
+                @Html.TextBoxFor(model => Model.PakkeDimensioner.Bredde);
+            </div>
+            <div class="editor-label">
+                @Html.LabelFor(model => Model.PakkeDimensioner.Laengde);
+            </div>
+            <div>
+                @Html.TextBoxFor(model => Model.PakkeDimensioner.Laengde);
+            </div>
+            <div class="editor-label">
+                @Html.LabelFor(model => Model.PakkeDimensioner.Hoejde);
+            </div>
+            <div>
+                @Html.TextBoxFor(model => Model.PakkeDimensioner.Hoejde);
+            </div>
+            <div class="editor-label">
+                @Html.LabelFor(model => Model.Vaegt);
+            </div>
+            <div>
+                @Html.TextBoxFor(model => Model.Vaegt);
+            </div>
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => Model.Godstype)
+        </div>
+        <div class="editor-label">
+            @Html.EnumDropDownListFor(model => Model.Godstype)
+        </div>
+
+        
+
     </fieldset>
     <input type="submit" value="Søg" />
 
 }
 
-<h1>Fra: @Model.From</h1>
-<h1>Til: @Model.To</h1>
+<h1>Fra: </h1>
+<h1>Til: </h1>
 
