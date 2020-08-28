@@ -125,7 +125,19 @@ namespace CES2020.Services
             });
         }
 
-        public BeregnetRute ShortestPath(List<Forbindelse> forbindelser, List<By> byer, Forsendelse forsendelse)
+        public List<BeregnetRute> GetBeregnetRuter(List<Forbindelse> forbindelser, List<By> byer,
+            Forsendelse forsendelse)
+        {
+            var tidBR = ShortestPath(forbindelser, byer, forsendelse, "tid");
+            var prisBR = ShortestPath(forbindelser, byer, forsendelse,"pris");
+            var blandetBR = ShortestPath(forbindelser, byer, forsendelse, "blandet");
+            
+            List<BeregnetRute> brList = new List<BeregnetRute>(){tidBR, prisBR, blandetBR};
+
+            return brList;
+        }
+
+        public BeregnetRute ShortestPath(List<Forbindelse> forbindelser, List<By> byer, Forsendelse forsendelse, string priority)
         {
             var graph = new Graph<int, string>();
             foreach (By by in byer)
@@ -133,9 +145,23 @@ namespace CES2020.Services
                 graph.AddNode(by.Id);
             }
 
+            var priorityVar = 0;
+
             foreach (Forbindelse forbindelse in forbindelser)
             {
-                graph.Connect((uint)forbindelse.Fra.Id, (uint)forbindelse.Til.Id, forbindelse.Tid, "Tid");
+                if (priority is "tid")
+                {
+                    priorityVar = forbindelse.Tid;
+                }
+                else if (priority is "pris")
+                {
+                    priorityVar = (int)forbindelse.Pris;
+                }
+                else if (priority is "blandet")
+                {
+                    priorityVar = (int)(0.5*forbindelse.Tid) + (int)(0.5*forbindelse.Pris);
+                }
+                graph.Connect((uint)forbindelse.Fra.Id, (uint)forbindelse.Til.Id, priorityVar, "");
             }
             ShortestPathResult result = graph.Dijkstra((uint)forsendelse.Fra.Id, (uint)forsendelse.Til.Id); //result contains the shortest path
 
