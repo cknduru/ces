@@ -50,12 +50,16 @@ namespace CES2020.Services
 
             var telstarForbindelser = telstarForbindelseRepository.GetAll();
 
+            var telstarForb = new List<TelstarForbindelse>();
             foreach (var forbindelse in telstarForbindelser)
             {
-                forbindelse.ComputeBasePricesAndTimes(konfiguration);
+
+                forbindelse.Tid = forbindelse.AntalSegmenter * konfiguration.TelstarSegmentTid;
+                forbindelse.Pris = forbindelse.AntalSegmenter * (float)konfiguration.TelstarSegmentPris;
+                telstarForb.Add(forbindelse);
             }
 
-            possibleForbindelser = telstarForbindelser.Where(f => f.Udløbsdato == null || f.Udløbsdato > forsendelse.Forsendelsesdato);
+            possibleForbindelser = telstarForb.Where(f => f.Udløbsdato == null || f.Udløbsdato > forsendelse.Forsendelsesdato);
 
             return possibleForbindelser;
         }
@@ -94,6 +98,8 @@ namespace CES2020.Services
         {
             switch (godstypeName)
             {
+                case "":
+                    return Enums.GodsType.DEFAULT;
                 case "REF":
                     return Enums.GodsType.REF;
                 case "ANI":
@@ -121,7 +127,7 @@ namespace CES2020.Services
             });
         }
 
-        public ShortestPathResult ShortestPath(List<Forbindelse> forbindelser, List<By> byer, int fra, int til)
+        public BeregnetRute ShortestPath(List<Forbindelse> forbindelser, List<By> byer, Forsendelse forsendelse)
         {
             var graph = new Graph<int, string>();
             foreach (By by in byer)
@@ -133,12 +139,85 @@ namespace CES2020.Services
             {
                 graph.Connect((uint)forbindelse.Fra.Id, (uint)forbindelse.Til.Id, forbindelse.Tid, "Tid");
             }
-            ShortestPathResult result = graph.Dijkstra((uint)fra, (uint)til); //result contains the shortest path
+            ShortestPathResult result = graph.Dijkstra((uint)forsendelse.Fra.Id, (uint)forsendelse.Til.Id); //result contains the shortest path
 
-            return result;
+            var path = result.GetPath().ToList();
+            var minForbindelseList = new List<Forbindelse>();
+            for (int i = 0; i < path.Count() - 1; i++)
+            {
+                var matchingForbindelser = forbindelser.Where(f => f.Fra.Id == path[i] && f.Til.Id == path[i + 1]);
+                var minForbindelse =
+                    matchingForbindelser.FirstOrDefault(m => m.Tid == matchingForbindelser.Select(x => x.Tid).Min());
+                minForbindelseList.Add(minForbindelse);
+            }
+
+            var beregnetRute = CreateBeregnetRute(minForbindelseList, forsendelse);
+
+            return beregnetRute;
 
         }
 
-        
+        public BeregnetRute CreateBeregnetRute(List<Forbindelse> forbindelser, Forsendelse forsendelse)
+        {
+            var andel = Andel(forbindelser);
+
+            var samletTid = SamletTid(forbindelser);
+
+            var tillaeg = godstypeRepository.Get(forsendelse.Godstype).Tillaeg;
+
+            var samletPris = SamletPris(forbindelser) + tillaeg;
+
+
+            BeregnetRute br = new BeregnetRute()
+            {
+                Forbindelser = forbindelser,
+                Andel = (int)(andel * (1 - konfiguration.Rabat / 100)),
+                Forsendelse = forsendelse,
+                SamletTid = samletTid,
+                SamletPris = samletPris
+            };
+
+            return br;
+        }
+
+        private float SamletPris(List<Forbindelse> forbindelser)
+        {
+            var pris = 0.0f;
+            foreach (var forbindelse in forbindelser)
+            {
+                if (forbindelse.ForbindelsesType == Enums.Forbindelsestype.Telstar)
+                {
+                    pris += forbindelse.Pris * (1 - konfiguration.Rabat / 100);
+                }
+                else
+                {
+                    pris += forbindelse.Pris;
+                }
+            }
+
+            return pris;
+        }
+
+        private static int SamletTid(List<Forbindelse> forbindelser)
+        {
+            return forbindelser.Sum(f => f.Tid);
+        }
+
+        private static float Andel(List<Forbindelse> forbindelser)
+        {
+            float andel = 0.0f;
+
+            foreach (Forbindelse forbindelse in forbindelser)
+            {
+                if (forbindelse.ForbindelsesType == Enums.Forbindelsestype.Telstar)
+                {
+                    andel += forbindelse.Pris;
+                }
+            }
+
+            return andel;
+        }
+
+
     }
 }

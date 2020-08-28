@@ -67,9 +67,12 @@ namespace CES2020.Integrs
 
         public ForsendelseDto ConvertToForsendelseDto(Forsendelse forsendelse)
         {
+            var godstypeName = GetGodstypeName(forsendelse.Godstype);
+            var goodsTypeIds = godstypeName != null ? new string[] {godstypeName} : new string[] {};
+
             return new ForsendelseDto()
             { 
-                GoodsTypeIds = new string[] { GetGodstypeName(forsendelse.Godstype) },
+                GoodsTypeIds = goodsTypeIds,
                 Weight = forsendelse.Vaegt,
                 Length = forsendelse.PakkeDimensioner.Laengde,
                 Width = forsendelse.PakkeDimensioner.Bredde,
@@ -92,8 +95,10 @@ namespace CES2020.Integrs
                     return "EXP";
                 case Enums.GodsType.WEP:
                     return "WEP";
+                case Enums.GodsType.DEFAULT:
+                    return null;
                 default:
-                    return string.Empty;
+                    return null;
             }
         }
     }

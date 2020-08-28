@@ -12,11 +12,5 @@ namespace CES2020.Models
         public DateTime? Udløbsdato { get; set; }
 
         public int AntalSegmenter { get; set; }
-
-        public void ComputeBasePricesAndTimes(Konfiguration konfiguration)
-        {
-            this.Pris = this.AntalSegmenter * (float)konfiguration.TelstarSegmentPris;
-            this.Tid = this.AntalSegmenter * konfiguration.TelstarSegmentTid;
-        }
     }
 }

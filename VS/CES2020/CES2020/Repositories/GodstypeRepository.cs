@@ -35,6 +35,15 @@ namespace CES2020.Repositories
 
         public Godstype Get(Enums.GodsType godstype)
         {
+            if (godstype == Enums.GodsType.DEFAULT)
+            {
+                return new Godstype()
+                {
+                    Id = 0,
+                    Type = Enums.GodsType.DEFAULT,
+                    Tillaeg = 0
+                };
+            }
             return _db.Godstyper.FirstOrDefault(g => g.Type == godstype);
         }
 
